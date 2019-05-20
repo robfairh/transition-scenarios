@@ -108,7 +108,7 @@
             <assem_size>3950</assem_size>
             <n_assem_core>4</n_assem_core>
             <n_assem_batch>1</n_assem_batch>
-            <power_cap>333.3</power_cap>
+            <power_cap>333.34</power_cap>
         </Reactor>
     </config>
 </facility>
@@ -524,37 +524,61 @@
 	    <name>lwr_inst</name>
 	    <config>
 	        <DeployInst>
-	            <prototypes>
-				<val>lwr</val> 
-				<val>lwr</val> 
-				<val>lwr</val> 
-				<val>lwr</val> 
-				<val>lwr</val> 
-				<val>lwr</val> 
+	        <prototypes>
+                <val>lwr</val> 
+                <val>lwr</val> 
+                <val>lwr</val> 
+                <val>lwr</val> 
+                <val>lwr</val> 
+                <val>lwr</val> 
+                <val>lwr</val> 
+                <val>lwr</val> 
+                <val>lwr</val> 
+                <val>lwr</val> 
+                <val>lwr</val> 
+                <val>lwr</val> 
 			</prototypes> 
 	 		<build_times>
-				<val>1</val> 
-				<val>1</val> 
-				<val>1</val> 
-				<val>1</val> 
-				<val>1</val> 
-				<val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
 			</build_times> 
 	 		<n_build>
-				<val>10</val> 
-				<val>10</val> 
-				<val>10</val> 
-				<val>10</val> 
-				<val>10</val> 
-				<val>10</val> 
+				<val>6</val> 
+				<val>6</val> 
+				<val>6</val> 
+				<val>6</val> 
+				<val>6</val> 
+				<val>6</val> 
+                <val>4</val> 
+                <val>4</val> 
+                <val>4</val> 
+                <val>4</val> 
+                <val>4</val> 
+                <val>4</val> 
 			</n_build> 
 	 		<lifetimes>
-				<val>960</val> 
-				<val>970</val> 
-				<val>980</val> 
-				<val>990</val> 
-				<val>1000</val> 
-				<val>1010</val> 
+                <val>960</val> 
+                <val>970</val> 
+                <val>980</val> 
+                <val>990</val> 
+                <val>1000</val> 
+                <val>1010</val> 
+                <val>1020</val> 
+                <val>1030</val> 
+                <val>1040</val> 
+                <val>1050</val> 
+                <val>1060</val> 
+                <val>1070</val> 
 			</lifetimes>
 			</DeployInst>
 		</config>
@@ -605,12 +629,12 @@
                 <val>moxlwr</val> 
             </prototypes> 
             <build_times>
-                <val>961</val>
-                <val>971</val>
-                <val>981</val>
-                <val>991</val>
-                <val>1001</val>
-                <val>1011</val>
+                <val>1021</val>
+                <val>1031</val>
+                <val>1041</val>
+                <val>1051</val>
+                <val>1061</val>
+                <val>1071</val>
             </build_times> 
             <n_build>
                 <val>4</val> 
