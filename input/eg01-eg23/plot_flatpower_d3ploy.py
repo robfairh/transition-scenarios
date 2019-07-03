@@ -17,9 +17,9 @@ import collections
 
 # Delete previously generated files
 direc = os.listdir('./')
-hit_list = glob.glob('*.png') + glob.glob('*.csv') + glob.glob('*.txt')
-for file in hit_list:
-    os.remove(file)
+#hit_list = glob.glob('*.png') + glob.glob('*.csv') + glob.glob('*.txt')
+#for file in hit_list:
+#    os.remove(file)
 
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
@@ -27,7 +27,7 @@ ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 # initialize metric dict
 demand_eq = '60000'
 calc_method = 'ma'
-name = "eg01-eg23-flatpower-d3ploy"
+name = "eg01-eg23-flatpower-d3ploy-ma"
 output_file = name + ".sqlite"
 
 # Initialize dicts
@@ -43,8 +43,8 @@ commod_dict = {'enrichmentout': ['enrichment'],
                'frstorageout': ['frreprocessing'],
                'lwrout': ['lwrstorage'],
                'frout': ['frstorage'],
-               'lwrpu': ['pumixerlwr'],
-               'frpu': ['pumixerfr'],
+               'lwrpu': ['lwrmixer'],
+               'frpu': ['frmixer'],
                'lwrreprocessingwaste': ['lwrsink'],
                'frreprocessingwaste': ['frsink']}
 
@@ -86,4 +86,4 @@ for commod in back_commods:
         all_dict[commod], metric_dict, calc_method, commod, False)
 
 df = pd.DataFrame(metric_dict)
-df.to_csv('eg01-eg23-flatpower-d3ploy.csv')
+df.to_csv('eg01-eg23-flatpower-d3ploy2.csv')

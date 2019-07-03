@@ -481,7 +481,6 @@
     <DemandDrivenDeploymentInst>
         <calc_method>ma</calc_method>
         <demand_eq>60000</demand_eq>
-        <demand_std_dev>1</demand_std_dev>
         <steps>1</steps>
         <facility_commod>
         <item>
@@ -526,7 +525,6 @@
     <config>
     <SupplyDrivenDeploymentInst>
         <calc_method>ma</calc_method>
-        <capacity_std_dev>1</capacity_std_dev>
         <steps>1</steps>
         <facility_commod>
         <item>
