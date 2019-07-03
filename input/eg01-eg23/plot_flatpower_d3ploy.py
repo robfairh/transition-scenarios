@@ -1,4 +1,8 @@
-# this file produces the plots for the case eg01-eg23-flatpower-d3ploy.xml
+"""
+This file produces the plots for the case eg01-eg23-flatpower-d3ploy.xml
+It plots for only one calculation method
+Not very useful to compare different calculation methods
+"""
 
 import json
 import re
