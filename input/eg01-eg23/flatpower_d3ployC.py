@@ -1206,7 +1206,7 @@ for calc_method in calc_methods:
 
     input_file = 'eg01-eg23-flatpower-d3ploy-installed-buffer'+ buff_size + '-' + calc_method + '.xml'
     output_file = 'eg01-eg23-flatpower-d3ploy-installed-buffer'+ buff_size + '-' + calc_method + '.sqlite'
-   
+
     with open(input_file, 'w') as f:
         f.write('<simulation>\n')
         f.write(control)
@@ -1216,4 +1216,3 @@ for calc_method in calc_methods:
 
     s = subprocess.check_output(['cyclus', '-o', output_file, input_file],
                             universal_newlines=True, env=ENV)
-

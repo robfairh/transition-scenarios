@@ -1184,31 +1184,11 @@ for calc_method in calc_methods:
     </region>
     """%(calc_method,demand_eq,calc_method)
 
-metric_dict = {}
-agent_entry_dict = {}
-all_dict = {}
-commod_dict = {'enrichmentout': ['enrichment'],
-               'sourceout': ['source'],
-               'power': ['lwr', 'fr'],
-               'lwrstorageout': ['lwrreprocessing'],
-               'frstorageout': ['frreprocessing'],
-               'lwrout': ['lwrstorage'],
-               'frout': ['frstorage'],
-               'lwrpu': ['pumixerlwr'],
-               'frpu': ['pumixerfr'],
-               'lwrreprocessingwaste': ['lwrsink'],
-               'frreprocessingwaste': ['frsink']}
-
-front_commods = ['sourceout', 'enrichmentout']
-back_commods = ['lwrstorageout', 'frstorageout', 'lwrout', 'frout',
-                'lwrreprocessingwaste', 'frreprocessingwaste', 'frpu',
-                'lwrpu']
-
 for calc_method in calc_methods:
 
     input_file = 'eg01-eg23-flatpower-d3ploy-installed-'+ calc_method +'.xml'
     output_file = 'eg01-eg23-flatpower-d3ploy-installed-'+ calc_method +'.sqlite'
-   
+
     with open(input_file, 'w') as f:
         f.write('<simulation>\n')
         f.write(control)
@@ -1218,34 +1198,3 @@ for calc_method in calc_methods:
 
     s = subprocess.check_output(['cyclus', '-o', output_file, input_file],
                             universal_newlines=True, env=ENV)
-
-"""
-    for commod, facility in commod_dict.items():
-        agent_entry_dict[commod] = tester.get_agent_dict(output_file, facility)
-
-    all_dict['power'] = tester.supply_demand_dict_driving(
-    output_file, demand_eq, 'power')
-
-    plotter.plot_demand_supply_agent(all_dict['power'], agent_entry_dict['power'],
-                                 'power', 'eg01-eg23-flatpower-d3ploy'+ calc_method +'_power',
-                                 True, True, False, 1)
-
-    metric_dict = tester.metrics(
-        all_dict['power'], metric_dict, calc_method, 'power', True)
-
-    for commod in front_commods:
-        all_dict[commod] = tester.supply_demand_dict_nondriving(output_file,
-                                                                commod, True)
-        metric_dict = tester.metrics(
-            all_dict[commod], metric_dict, calc_method, commod, True)
-
-    for commod in back_commods:
-        all_dict[commod] = tester.supply_demand_dict_nondriving(output_file,
-                                                                commod, False)
-        metric_dict = tester.metrics(
-            all_dict[commod], metric_dict, calc_method, commod, False)
-  
-    df = pd.DataFrame(metric_dict)
-    df.to_csv('eg01-eg23-flatpower-d3ploy.csv')
-"""
-

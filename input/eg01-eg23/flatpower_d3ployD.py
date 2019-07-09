@@ -6,7 +6,7 @@ The user can choose a demand equation (demand_eq) and a buffer by running:
 python flatpower_d3ployD.py <buff_size>
 
 for ex: to define a buffer of 2000 MW
-python flatpower_d3ployC.py 2000
+python flatpower_d3ployD.py 2000
 
 The installed capacity feature is not used.
 The buffer is used during the whole simulation.
