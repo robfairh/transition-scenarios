@@ -15,11 +15,12 @@ import d3ploy.tester as tester
 import d3ploy.plotter as plotter
 import collections
 
-# Delete previously generated files
 direc = os.listdir('./')
-hit_list = glob.glob('*.png') + glob.glob('*.csv') + glob.glob('*.txt')
-for file in hit_list:
-    os.remove(file)
+
+# Delete previously generated files
+#hit_list = glob.glob('*.png') + glob.glob('*.csv') + glob.glob('*.txt')
+#for file in hit_list:
+#    os.remove(file)
 
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
@@ -27,7 +28,7 @@ ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 # initialize metric dict
 demand_eq = '60000'
 calc_method = 'ma'
-name = "eg01-eg23-flatpower-nond3ploy"
+name = "eg01-eg24-flatpower-nond3ploy"
 output_file = name + ".sqlite"
 
 # Initialize dicts
@@ -57,7 +58,7 @@ all_dict['power'] = tester.supply_demand_dict_nond3ploy(
 
 plotter.plot_demand_supply_nond3ploy(all_dict['power'],
                                      agent_entry_dict['power'], 'power',
-                                     'eg01-eg23-flatpower-nond3ploy_power',
+                                     'eg01-eg24-flatpower-nond3ploy_power',
                                      True, True, 1)
 
 front_commods = ['sourceout', 'enrichmentout']
@@ -68,7 +69,7 @@ back_commods = ['lwrstorageout', 'frstorageout', 'lwrout', 'frout',
 for commod in front_commods:
     all_dict[commod] = tester.supply_demand_dict_nond3ploy(output_file,
                                                            commod)
-    name = 'eg01-eg23-flatpower-nond3ploy_' + commod
+    name = 'eg01-eg24-flatpower-nond3ploy_' + commod
     plotter.plot_demand_supply_nond3ploy(all_dict[commod],
                                          agent_entry_dict[commod], commod,
                                          name, True, True, 1)
@@ -77,7 +78,7 @@ for commod in back_commods:
     all_dict[commod] = tester.supply_demand_dict_nond3ploy(output_file,
                                                            commod, False)
 
-    name = 'eg01-eg23-flatpower-nond3ploy_' + commod
+    name = 'eg01-eg24-flatpower-nond3ploy_' + commod
     plotter.plot_demand_supply_nond3ploy(all_dict[commod],
                                          agent_entry_dict[commod],
                                          commod, name, False, True, 1)

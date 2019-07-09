@@ -1,7 +1,8 @@
 """
-This file produces the plots for the case eg01-eg23-flatpower-d3ploy.xml
-It plots for only one calculation method
-Not very useful to compare different calculation methods
+This file produces the plots for one scenario.
+The plots are produced for only one calculation method.
+This is not useful to compare different calculation methods
+but to see the outputs of only one simulation.
 """
 
 import json
@@ -19,11 +20,12 @@ import d3ploy.tester as tester
 import d3ploy.plotter as plotter
 import collections
 
-# Delete previously generated files
 direc = os.listdir('./')
-hit_list = glob.glob('*.png') + glob.glob('*.csv')
-for file in hit_list:
-    os.remove(file)
+
+# Delete previously generated files
+#hit_list = glob.glob('*.png') + glob.glob('*.csv')
+#for file in hit_list:
+#    os.remove(file)
 
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
@@ -31,7 +33,7 @@ ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 # initialize metric dict
 demand_eq = '60000'
 calc_method = 'arch'
-name = "eg01-eg23-flatpower-d3ploy-bufferB2000-arch"
+name = "eg01-eg23-flatpower-d3ploy-bufferB2000-"+ calc_method
 output_file = name + ".sqlite"
 
 # Initialize dicts
@@ -55,7 +57,6 @@ commod_dict = {'enrichmentout': ['enrichment'],
 for commod, facility in commod_dict.items():
     agent_entry_dict[commod] = tester.get_agent_dict(output_file, facility)
 
-# get supply deamnd dict
 all_dict['power'] = tester.supply_demand_dict_driving(
     output_file, demand_eq, 'power')
 

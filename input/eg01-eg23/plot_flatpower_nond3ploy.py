@@ -15,11 +15,12 @@ import d3ploy.tester as tester
 import d3ploy.plotter as plotter
 import collections
 
-# Delete previously generated files
 direc = os.listdir('./')
-hit_list = glob.glob('*.png') + glob.glob('*.csv') + glob.glob('*.txt')
-for file in hit_list:
-    os.remove(file)
+
+# Delete previously generated files
+#hit_list = glob.glob('*.png') + glob.glob('*.csv') + glob.glob('*.txt')
+#for file in hit_list:
+#    os.remove(file)
 
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')

@@ -1,4 +1,9 @@
-# this file produces the plots for the case eg01-eg23-flatpower-d3ploy.xml
+"""
+This file produces the plots for one scenario.
+The plots are produced for only one calculation method.
+This is not useful to compare different calculation methods
+but to see the outputs of only one simulation.
+"""
 
 import json
 import re
@@ -15,11 +20,12 @@ import d3ploy.tester as tester
 import d3ploy.plotter as plotter
 import collections
 
-# Delete previously generated files
 direc = os.listdir('./')
-hit_list = glob.glob('*.png') + glob.glob('*.csv') + glob.glob('*.txt')
-for file in hit_list:
-    os.remove(file)
+
+# Delete previously generated files
+#hit_list = glob.glob('*.png') + glob.glob('*.csv') + glob.glob('*.txt')
+#for file in hit_list:
+#    os.remove(file)
 
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
@@ -27,7 +33,7 @@ ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 # initialize metric dict
 demand_eq = '60000'
 calc_method = 'ma'
-name = "eg01-eg24-flatpower-d3ploy"
+name = "eg01-eg24-flatpower-d3ploy-bufferB2000-"+ calc_method
 output_file = name + ".sqlite"
 
 # Initialize dicts
@@ -67,7 +73,7 @@ back_commods = ['lwrstorageout', 'frstorageout', 'lwrout', 'frout',
 for commod in front_commods:
     all_dict[commod] = tester.supply_demand_dict_nondriving(output_file,
                                                             commod, True)
-    name = 'eg01-eg24-flatpower-d3ploy_' + commod
+    name = 'B2000-' + commod
     plotter.plot_demand_supply_agent(all_dict[commod],
                                      agent_entry_dict[commod], commod, name,
                                      True, True, False, 1)
@@ -78,7 +84,7 @@ for commod in back_commods:
     all_dict[commod] = tester.supply_demand_dict_nondriving(output_file,
                                                             commod, False)
 
-    name = 'eg01-eg24-flatpower-d3ploy_' + commod
+    name = 'B2000-' + commod
     plotter.plot_demand_supply_agent(all_dict[commod],
                                      agent_entry_dict[commod],
                                      commod, name, False, True, False, 1)
@@ -86,4 +92,4 @@ for commod in back_commods:
         all_dict[commod], metric_dict, calc_method, commod, False)
 
 df = pd.DataFrame(metric_dict)
-df.to_csv('eg01-eg24-flatpower-d3ploy.csv')
+df.to_csv('B2000-' + calc_method + '.csv')
