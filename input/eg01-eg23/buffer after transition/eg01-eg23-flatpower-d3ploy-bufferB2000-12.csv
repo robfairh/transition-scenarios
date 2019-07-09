@@ -1,0 +1,3 @@
+,power_residuals_under,power_residuals_over,power_undersupply,sourceout_residuals_under,sourceout_residuals_over,sourceout_undersupply,enrichmentout_residuals_under,enrichmentout_residuals_over,enrichmentout_undersupply,mixerout_residuals_under,mixerout_residuals_over,mixerout_undersupply,lwrpu_residuals_under,lwrpu_residuals_over,lwrpu_undersupply,frpu_residuals_under,frpu_residuals_over,frpu_undersupply
+arma,72320.6800000045,1032801.8799998789,21,0,1426045991791.179,0,0,143029941391.354,0,0,1419171776.8367217,0,1379766198.039808,20883.35374542782,1,423954959.6576849,9127.208945160835,1
+ma,79987.80000000427,920466.5999998839,21,0,1426046012157.25,0,0,143029941391.354,0,0,690472233.2646639,0,1379766198.039808,20883.35374542782,1,423981581.7759768,4563.417237616071,1

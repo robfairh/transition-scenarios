@@ -1,3 +1,17 @@
+"""
+Running this script generates .xml files and runs them producing the .sqlite
+files for all the prediction methods.
+
+The user can choose a demand equation (demand_eq) and a buffer by running:
+python flatpower_d3ployD.py <buff_size>
+
+for ex: to define a buffer of 2000 MW
+python flatpower_d3ployC.py 2000
+
+The installed capacity feature is not used.
+The buffer is used during the whole simulation.
+"""
+
 import json
 import re
 import subprocess
@@ -13,20 +27,19 @@ import d3ploy.tester as tester
 import d3ploy.plotter as plotter
 import collections
 
-# Delete previously generated files
 direc = os.listdir('./')
-hit_list = glob.glob('*.png') + glob.glob('*.csv') + glob.glob('*.sqlite')
+
+# Delete previously generated files
+#hit_list = glob.glob('*.png') + glob.glob('*.csv') + glob.glob('*.sqlite')
 #for file in hit_list:
 #    os.remove(file)
+
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 
-#calc_methods = ["ma"]
-#calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters", "fft", "sw_seasonal"]
-calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters", "fft"]
+calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters", "fft", "sw_seasonal"]
 
 demand_eq = "60000"
-
 buff_size = sys.argv[1]
 
 control = """
@@ -882,7 +895,7 @@ for calc_method in calc_methods:
 
     input_file = 'eg01-eg23-flatpower-d3ploy-buffer' + buff_size + '-' + calc_method + '.xml'
     output_file = 'eg01-eg23-flatpower-d3ploy-buffer' + buff_size + '-' + calc_method + '.sqlite'
-   
+
     with open(input_file, 'w') as f:
         f.write('<simulation>\n')
         f.write(control)
@@ -892,4 +905,3 @@ for calc_method in calc_methods:
 
     s = subprocess.check_output(['cyclus', '-o', output_file, input_file],
                             universal_newlines=True, env=ENV)
-

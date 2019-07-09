@@ -1,0 +1,9 @@
+Look-ahead-steps: 1, 3, 5
+eg01-eg23-flatpower-d3ploy-bufferB2000-1
+eg01-eg23-flatpower-d3ploy-bufferB2000-3
+eg01-eg23-flatpower-d3ploy-bufferB2000-5
+Look-back-steps: 2, 4, 8
+eg01-eg23-flatpower-d3ploy-bufferB2000-2
+eg01-eg23-flatpower-d3ploy-bufferB2000-4
+eg01-eg23-flatpower-d3ploy-bufferB2000-8
+eg01-eg23-flatpower-d3ploy-bufferB2000-12

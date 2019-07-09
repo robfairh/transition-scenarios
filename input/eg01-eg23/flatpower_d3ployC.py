@@ -1,3 +1,16 @@
+"""
+Running this script generates .xml files and runs them producing the .sqlite
+files for all the prediction methods.
+
+The user can choose a demand equation (demand_eq) and a buffer by running:
+python flatpower_d3ployC.py <buff_size>
+
+for ex: to define a buffer of 2000 MW
+python flatpower_d3ployC.py 2000
+
+The installed capacity feature is used.
+"""
+
 import json
 import re
 import subprocess
@@ -13,20 +26,19 @@ import d3ploy.tester as tester
 import d3ploy.plotter as plotter
 import collections
 
-# Delete previously generated files
 direc = os.listdir('./')
+
+# Delete previously generated files
 #hit_list = glob.glob('*.png') + glob.glob('*.csv') + glob.glob('*.sqlite')
 #for file in hit_list:
 #    os.remove(file)
+
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 
-#calc_methods = ["ma"]
-#calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters", "fft", "sw_seasonal"]
-calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters", "fft"]
+calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters", "fft", "sw_seasonal"]
 
 demand_eq = "60000"
-
 buff_size = sys.argv[1]
 
 control = """
