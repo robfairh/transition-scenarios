@@ -41,3 +41,14 @@ it works!!
 
 - eg01-eg29-flatpower-d3ploy4.xml
 it works with installed capacity!!
+I am not sure it works awesomely well
+The capacity is 2.4e4 when there are 1 frmixer and 3 moxmixers ...
+
+- eg01-eg29-flatpower-d3ploy5.xml
+Let's implement it better, there will be a frmixer1
+deployed by lwrpy supply, same for a moxmixer1
+Then there will be a frmixer2 deployed by the frpu supply
+and there will be a moxmixer2 deployed by the moxpu supply
+It doesn't work, the preference was set to 1000
+I changed it to 1200, it got worse ... let's go back to 1000
+Change mixing ratios ...
