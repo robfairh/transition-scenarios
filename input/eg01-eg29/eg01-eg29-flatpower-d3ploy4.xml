@@ -536,7 +536,6 @@
     <DemandDrivenDeploymentInst>
         <calc_method>ma</calc_method>
         <demand_eq>60000</demand_eq>
-        <steps>1</steps>
         <facility_commod>
         <item>
           <facility>source</facility>
@@ -592,7 +591,7 @@
     <config>
     <SupplyDrivenDeploymentInst>
         <calc_method>ma</calc_method>
-        <steps>1</steps>
+        <installed_cap>1</installed_cap>
         <facility_commod>
         <item>
             <facility>lwrstorage</facility>

@@ -365,6 +365,7 @@
     <config>
     <SupplyDrivenDeploymentInst>
         <calc_method>ma</calc_method>
+        <installed_cap>1</installed_cap>
         <facility_commod>
         <item>
             <facility>frmixer</facility>

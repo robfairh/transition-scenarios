@@ -35,3 +35,9 @@ deploys just frmixer with d3ploy
 mixer is not complete has lwrpu but not frpu
 it records that the capacity for lwrpu is 3000
 this is good
+
+using installed capacity for d3ploy-simple2.xml
+it works!!
+
+- eg01-eg29-flatpower-d3ploy4.xml
+it works with installed capacity!!
