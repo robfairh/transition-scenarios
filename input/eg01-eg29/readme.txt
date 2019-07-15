@@ -61,3 +61,13 @@ it doesn't work, same issue as with eg01-eg29
 - eg01-eg29-flatpower-d3ploy4.xml
 it works well now with the PR in cycamore and the PR in d3ploy
 both for installed capacity and predicted capacity
+
+- d3ploy-simple4.xml
+It should be working now!
+Solver minimizes the oversupply and also the number of facilities deployed.
+
+- eg01-eg29-flatpower-d3ploy5.xml
+Trying with new cycamore and d3ploy.
+It is necessary to play around with the sizes of the buffers.
+Both mixers should have in total something close to the supply of the driving commodity
+for ex: lwrpu. If the supply is 21000, then one could have 13000 and the other one 8000

@@ -319,7 +319,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.071</mixing_ratio>
-                        <buf_size>1.3e4</buf_size>
+                        <buf_size>9e3</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -331,7 +331,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.819</mixing_ratio>
-                        <buf_size>1.5e5</buf_size>
+                        <buf_size>1.1e5</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -343,68 +343,7 @@
                 <stream>
                     <info>
                       <mixing_ratio>0.110</mixing_ratio>
-                      <buf_size>2e4</buf_size>
-                    </info>
-                    <commodities>
-                      <item>
-                        <commodity>enrichmentwaste</commodity>
-                        <pref>2.0</pref>
-                      </item>
-                      <item>
-                        <commodity>sourceout</commodity>
-                        <pref>1.0</pref>
-                      </item>
-                    </commodities>
-                </stream>
-            </in_streams>
-            <out_commod>frmixerout</out_commod>
-            <out_buf_size>1e8</out_buf_size>
-            <throughput>1e10</throughput>
-        </Mixer>
-    </config>
-</facility>
-
-<facility>
-    <name>frmixer2</name>
-    <config>
-        <Mixer>
-            <in_streams>
-                <stream>
-                    <info>
-                        <mixing_ratio>0.071</mixing_ratio>
-                        <buf_size>1.3e4</buf_size>
-                    </info>
-                    <commodities>
-                        <item>
-                            <commodity>frpu</commodity>
-                            <pref>1.0</pref>
-                        </item>
-                        <item>
-                            <commodity>lwrpu</commodity>
-                            <pref>1.0</pref>
-                        </item>
-                    </commodities>
-                </stream>
-                <stream>
-                    <info>
-                        <mixing_ratio>0.819</mixing_ratio>
-                        <buf_size>1.5e5</buf_size>
-                    </info>
-                    <commodities>
-                        <item>
-                            <commodity>fru</commodity>
-                            <pref>1.0</pref>
-                        </item>
-                        <item>
-                            <commodity>lwru</commodity>
-                            <pref>1.0</pref>
-                        </item>
-                    </commodities>
-                </stream>
-                <stream>
-                    <info>
-                      <mixing_ratio>0.110</mixing_ratio>
-                      <buf_size>2e4</buf_size>
+                      <buf_size>1.4e4</buf_size>
                     </info>
                     <commodities>
                       <item>
@@ -433,7 +372,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.0911</mixing_ratio>
-                        <buf_size>8e3</buf_size>
+                        <buf_size>1.2e4</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -445,7 +384,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.9089</mixing_ratio>
-                        <buf_size>8e4</buf_size>
+                        <buf_size>1.2e5</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -463,6 +402,67 @@
 </facility>
 
 <facility>
+    <name>frmixer2</name>
+    <config>
+        <Mixer>
+            <in_streams>
+                <stream>
+                    <info>
+                        <mixing_ratio>0.071</mixing_ratio>
+                        <buf_size>4.e3</buf_size>
+                    </info>
+                    <commodities>
+                        <item>
+                            <commodity>frpu</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                        <item>
+                            <commodity>lwrpu</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                    </commodities>
+                </stream>
+                <stream>
+                    <info>
+                        <mixing_ratio>0.819</mixing_ratio>
+                        <buf_size>4.6e4</buf_size>
+                    </info>
+                    <commodities>
+                        <item>
+                            <commodity>fru</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                        <item>
+                            <commodity>lwru</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                    </commodities>
+                </stream>
+                <stream>
+                    <info>
+                      <mixing_ratio>0.110</mixing_ratio>
+                      <buf_size>6.2e3</buf_size>
+                    </info>
+                    <commodities>
+                      <item>
+                        <commodity>enrichmentwaste</commodity>
+                        <pref>2.0</pref>
+                      </item>
+                      <item>
+                        <commodity>sourceout</commodity>
+                        <pref>1.0</pref>
+                      </item>
+                    </commodities>
+                </stream>
+            </in_streams>
+            <out_commod>frmixerout</out_commod>
+            <out_buf_size>1e8</out_buf_size>
+            <throughput>1e10</throughput>
+        </Mixer>
+    </config>
+</facility>
+
+<facility>
     <name>moxmixer2</name>
     <config>
         <Mixer>
@@ -470,7 +470,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.0911</mixing_ratio>
-                        <buf_size>8e3</buf_size>
+                        <buf_size>6e3</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -491,7 +491,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.9089</mixing_ratio>
-                        <buf_size>8e4</buf_size>
+                        <buf_size>6e4</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -682,7 +682,6 @@
     <config>
     <SupplyDrivenDeploymentInst>
         <calc_method>ma</calc_method>
-        <installed_cap>1</installed_cap>
         <facility_commod>
         <item>
             <facility>lwrstorage</facility>
@@ -722,7 +721,7 @@
         </item>
         <item>
             <facility>moxmixer2</facility>
-            <commod>moxpu</commod>
+            <commod>frpu</commod>
         </item>
         <item>
             <facility>lwrsink</facility>
@@ -764,19 +763,19 @@
         </item>
         <item>
             <facility>frmixer1</facility>
-            <capacity>1.3e4</capacity>
+            <capacity>9.e3</capacity>
         </item>
         <item>
             <facility>moxmixer1</facility>
-            <capacity>8e3</capacity>
+            <capacity>1.2e4</capacity>
         </item>
         <item>
             <facility>frmixer2</facility>
-            <capacity>1.3e4</capacity>
+            <capacity>4.e3</capacity>
         </item>
         <item>
             <facility>moxmixer2</facility>
-            <capacity>8e3</capacity>
+            <capacity>6.e3</capacity>
         </item>
         <item>
             <facility>lwrsink</facility>

@@ -1,7 +1,7 @@
 <simulation>
 
 <control>
-    <duration>80</duration>
+    <duration>1440</duration>
     <startmonth>1</startmonth>
     <startyear>2000</startyear>
     <decay>lazy</decay>
@@ -591,7 +591,6 @@
     <config>
     <SupplyDrivenDeploymentInst>
         <calc_method>ma</calc_method>
-        <installed_cap>1</installed_cap>
         <facility_commod>
         <item>
             <facility>lwrstorage</facility>
