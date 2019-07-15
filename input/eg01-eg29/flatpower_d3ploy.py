@@ -343,7 +343,210 @@ control = """
     </config>
 </facility>
 
-*******************here
+<facility>
+    <name>frmixer1</name>
+    <config>
+        <Mixer>
+            <in_streams>
+                <stream>
+                    <info>
+                        <mixing_ratio>0.071</mixing_ratio>
+                        <buf_size>9e3</buf_size>
+                    </info>
+                    <commodities>
+                        <item>
+                            <commodity>lwrpu</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                    </commodities>
+                </stream>
+                <stream>
+                    <info>
+                        <mixing_ratio>0.819</mixing_ratio>
+                        <buf_size>1.1e5</buf_size>
+                    </info>
+                    <commodities>
+                        <item>
+                            <commodity>lwru</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                    </commodities>
+                </stream>
+                <stream>
+                    <info>
+                      <mixing_ratio>0.110</mixing_ratio>
+                      <buf_size>1.4e4</buf_size>
+                    </info>
+                    <commodities>
+                      <item>
+                        <commodity>enrichmentwaste</commodity>
+                        <pref>2.0</pref>
+                      </item>
+                      <item>
+                        <commodity>sourceout</commodity>
+                        <pref>1.0</pref>
+                      </item>
+                    </commodities>
+                </stream>
+            </in_streams>
+            <out_commod>frmixerout</out_commod>
+            <out_buf_size>1e8</out_buf_size>
+            <throughput>1e10</throughput>
+        </Mixer>
+    </config>
+</facility>
+
+<facility>
+    <name>moxmixer1</name>
+    <config>
+        <Mixer>
+            <in_streams>
+                <stream>
+                    <info>
+                        <mixing_ratio>0.0911</mixing_ratio>
+                        <buf_size>1.2e4</buf_size>
+                    </info>
+                    <commodities>
+                        <item>
+                            <commodity>lwrpu</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                    </commodities>
+                </stream>
+                <stream>
+                    <info>
+                        <mixing_ratio>0.9089</mixing_ratio>
+                        <buf_size>1.2e5</buf_size>
+                    </info>
+                    <commodities>
+                        <item>
+                            <commodity>lwru</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                    </commodities>
+                </stream>
+            </in_streams>
+            <out_commod>moxmixerout</out_commod>
+            <out_buf_size>1e9</out_buf_size>
+            <throughput>1e10</throughput>
+        </Mixer>
+    </config>
+</facility>
+
+<facility>
+    <name>frmixer2</name>
+    <config>
+        <Mixer>
+            <in_streams>
+                <stream>
+                    <info>
+                        <mixing_ratio>0.071</mixing_ratio>
+                        <buf_size>4.e3</buf_size>
+                    </info>
+                    <commodities>
+                        <item>
+                            <commodity>frpu</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                        <item>
+                            <commodity>lwrpu</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                    </commodities>
+                </stream>
+                <stream>
+                    <info>
+                        <mixing_ratio>0.819</mixing_ratio>
+                        <buf_size>4.6e4</buf_size>
+                    </info>
+                    <commodities>
+                        <item>
+                            <commodity>fru</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                        <item>
+                            <commodity>lwru</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                    </commodities>
+                </stream>
+                <stream>
+                    <info>
+                      <mixing_ratio>0.110</mixing_ratio>
+                      <buf_size>6.2e3</buf_size>
+                    </info>
+                    <commodities>
+                      <item>
+                        <commodity>enrichmentwaste</commodity>
+                        <pref>2.0</pref>
+                      </item>
+                      <item>
+                        <commodity>sourceout</commodity>
+                        <pref>1.0</pref>
+                      </item>
+                    </commodities>
+                </stream>
+            </in_streams>
+            <out_commod>frmixerout</out_commod>
+            <out_buf_size>1e8</out_buf_size>
+            <throughput>1e10</throughput>
+        </Mixer>
+    </config>
+</facility>
+
+<facility>
+    <name>moxmixer2</name>
+    <config>
+        <Mixer>
+            <in_streams>
+                <stream>
+                    <info>
+                        <mixing_ratio>0.0911</mixing_ratio>
+                        <buf_size>6e3</buf_size>
+                    </info>
+                    <commodities>
+                        <item>
+                            <commodity>moxpu</commodity>
+                            <pref>2.0</pref>
+                        </item>
+                        <item>
+                            <commodity>lwrpu</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                        <item>
+                            <commodity>frpu</commodity>
+                            <pref>1.0</pref>
+                        </item>
+
+                    </commodities>
+                </stream>
+                <stream>
+                    <info>
+                        <mixing_ratio>0.9089</mixing_ratio>
+                        <buf_size>6e4</buf_size>
+                    </info>
+                    <commodities>
+                        <item>
+                            <commodity>moxu</commodity>
+                            <pref>2.0</pref>
+                        </item>
+                        <item>
+                            <commodity>lwru</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                        <item>
+                            <commodity>fru</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                    </commodities>
+                </stream>
+            </in_streams>
+            <out_commod>moxmixerout</out_commod>
+            <out_buf_size>1e9</out_buf_size>
+            <throughput>1e10</throughput>
+        </Mixer>
+    </config>
+</facility>
 
 <facility>
     <name>lwrsink</name>
@@ -381,8 +584,6 @@ control = """
     </config>
 </facility>
 """
-
-*******************here
 
 recipes = """
 <recipe>
@@ -766,8 +967,9 @@ for calc_method in calc_methods:
     <institution>
     <config>
     <DemandDrivenDeploymentInst>
-        <calc_method>ma</calc_method>
-        <demand_eq>60000</demand_eq>
+        <calc_method>%s</calc_method>
+        <demand_eq>%s</demand_eq>
+
         <facility_commod>
         <item>
           <facility>source</facility>
@@ -814,6 +1016,18 @@ for calc_method in calc_methods:
           <pref>t-1000</pref>
         </item>
         </facility_pref>
+        <buffer_type>
+        <item>
+            <commod>POWER</commod>
+            <type>float</type>
+        </item>
+        </buffer_type>
+        <supply_buffer>
+        <item>
+            <commod>POWER</commod>
+            <buffer>%s</buffer>
+        </item>
+        </supply_buffer>
     </DemandDrivenDeploymentInst>
     </config>
     <name>timeseriesinst</name>
@@ -822,7 +1036,7 @@ for calc_method in calc_methods:
     <institution>
     <config>
     <SupplyDrivenDeploymentInst>
-        <calc_method>ma</calc_method>
+        <calc_method>%s</calc_method>
         <facility_commod>
         <item>
             <facility>lwrstorage</facility>
@@ -957,13 +1171,11 @@ for calc_method in calc_methods:
     <name>SingleRegion</name>
     </region>""" % (calc_method, demand_eq, buff_size, calc_method)
 
-    ***********************here, insert the variables in the region
-
 for calc_method in calc_methods:
 
-    input_file = 'eg01-eg23-flatpower-d3ploy-buffer' + buff_size + '-' \
+    input_file = 'eg01-eg29-flatpower-d3ploy-buffer' + buff_size + '-' \
         + calc_method + '.xml'
-    output_file = 'eg01-eg23-flatpower-d3ploy-buffer' + buff_size + '-' \
+    output_file = 'eg01-eg29-flatpower-d3ploy-buffer' + buff_size + '-' \
         + calc_method + '.sqlite'
 
     with open(input_file, 'w') as f:
