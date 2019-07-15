@@ -1,7 +1,7 @@
 <simulation>
 
 <control>
-    <duration>1440</duration>
+    <duration>80</duration>
     <startmonth>1</startmonth>
     <startyear>2000</startyear>
     <decay>lazy</decay>

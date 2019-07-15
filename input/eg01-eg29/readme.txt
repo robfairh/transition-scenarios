@@ -52,3 +52,12 @@ and there will be a moxmixer2 deployed by the moxpu supply
 It doesn't work, the preference was set to 1000
 I changed it to 1200, it got worse ... let's go back to 1000
 Change mixing ratios ...
+
+- d3ploy-simple4.xml
+deploys just frmixer and moxmixer that uses lwrpu
+mixers are complete
+it doesn't work, same issue as with eg01-eg29
+
+- eg01-eg29-flatpower-d3ploy4.xml
+it works well now with the PR in cycamore and the PR in d3ploy
+both for installed capacity and predicted capacity

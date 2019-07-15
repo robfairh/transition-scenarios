@@ -1,7 +1,7 @@
 <simulation>
 
 <control>
-    <duration>400</duration>
+    <duration>16</duration>
     <startmonth>1</startmonth>
     <startyear>2000</startyear>
 </control>
@@ -365,7 +365,7 @@
     <config>
     <SupplyDrivenDeploymentInst>
         <calc_method>ma</calc_method>
-        <installed_cap>1</installed_cap>
+
         <facility_commod>
         <item>
             <facility>frmixer</facility>
