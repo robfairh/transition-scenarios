@@ -26,13 +26,14 @@ direc = os.listdir('./')
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 
-calc_methods = ["ma"]
+calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters",
+                "fft"]
 
 #calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters",
 #                "fft", "sw_seasonal"]
 
 demand_eq = "60000"
-buff_size = "2000"
+buff_size = sys.argv[1]
 
 control = """
 <control>
