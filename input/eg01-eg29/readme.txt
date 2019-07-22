@@ -1,3 +1,26 @@
+now that d3ploy works:
+
+- flatpower_d3ploy.py
+
+<name>frmixer1</name>
+Pu: 9e3, U: 1.1e5, nat-U: 1.4e4
+<name>moxmixer1</name>
+Pu: 1.2e4, U: 1.2e5
+<name>frmixer2</name>
+Pu: 4.e3, U: 4.6e4, nat-U: 6.2e3
+<name>moxmixer2</name>
+Pu: 6e3, U: 6e4
+
+- flatpower_d3ploy2.py
+<name>frmixer1</name>
+Pu: 9e3, U: 1.1e5, nat-U: 1.4e4
+<name>moxmixer1</name>
+Pu: 1.2e4, U: 1.2e5
+<name>frmixer2</name>
+Pu: 3.5e3, U: 4.1e4, nat-U: 5.5e3
+<name>moxmixer2</name>
+Pu: 3e3, U: 3e4
+
 readme:
 
 - eg01-eg29-flatpower-d3ploy.xml

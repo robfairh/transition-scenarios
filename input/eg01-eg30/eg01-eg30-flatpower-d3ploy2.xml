@@ -355,7 +355,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.1146</mixing_ratio>
-                        <buf_size>2e4</buf_size>
+                        <buf_size>1.3e4</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -375,7 +375,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.8854</mixing_ratio>
-                        <buf_size>1.6e5</buf_size>
+                        <buf_size>1.1e5</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -412,7 +412,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.104</mixing_ratio>
-                        <buf_size>2e5</buf_size>
+                        <buf_size>1.2e4</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -432,7 +432,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.896</mixing_ratio>
-                        <buf_size>1.8e6</buf_size>
+                        <buf_size>1.1e5</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -502,23 +502,6 @@
         <NullRegion>
         </NullRegion>
     </config>
-
-    <institution>
-      	<config>
-        	<NullInst/>
-      	</config>
-      	<initialfacilitylist>
-        <entry>
-          <number>1</number>
-          <prototype>frmixer</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxmixer</prototype>
-        </entry>
-      	</initialfacilitylist>
-      	<name>sink_source_facilities</name>
-    </institution>
 
 	<institution> 
 	    <name>lwr_inst</name>
@@ -677,6 +660,14 @@
             <facility>moxsink</facility>
             <commod>moxreprocessingwaste</commod>
         </item>
+        <item>
+            <facility>frmixer</facility>
+            <commod>lwrtru</commod>
+        </item>
+        <item>
+            <facility>moxmixer</facility>
+            <commod>lwrtru</commod>
+        </item>
         </facility_commod>
         <facility_capacity>
         <item>
@@ -714,6 +705,14 @@
         <item>
             <facility>moxsink</facility>
             <capacity>1e20</capacity>
+        </item>
+        <item>
+            <facility>frmixer</facility>
+            <capacity>1.3e4</capacity>
+        </item>
+        <item>
+            <facility>moxmixer</facility>
+            <capacity>1.2e4</capacity>
         </item>
         </facility_capacity>
     </SupplyDrivenDeploymentInst>

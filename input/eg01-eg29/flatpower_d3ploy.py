@@ -26,18 +26,48 @@ direc = os.listdir('./')
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 
-calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters",
-                "fft"]
-
+calc_methods = ["ma"]
+#calc_methods = ["ma", "arma", "arch"]
 #calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters",
 #                "fft", "sw_seasonal"]
+
+name = 'eg01-eg29-flatpower-d3ploy-buffer'
 
 demand_eq = "60000"
 buff_size = sys.argv[1]
 
+buffer_fr1P = 9.e3
+buffer_fr1U = buffer_fr1P * 0.819 / 0.071
+buffer_fr1NU = buffer_fr1P * 0.110 / 0.071
+buffer_fr1P = str(buffer_fr1P)
+buffer_fr1U = str(buffer_fr1U)
+buffer_fr1NU = str(buffer_fr1NU)
+
+buffer_mox1P = 1.2e4
+buffer_mox1U = buffer_mox1P * 0.9089 / 0.0911
+buffer_mox1P = str(buffer_mox1P)
+buffer_mox1U = str(buffer_mox1U)
+
+buffer_fr2P = 4.e3
+buffer_fr2U = buffer_fr2P * 0.819 / 0.071
+buffer_fr2NU = buffer_fr2P * 0.819 / 0.071
+buffer_fr2P = str(buffer_fr2P)
+buffer_fr2U = str(buffer_fr2U)
+buffer_fr2NU = str(buffer_fr2NU)
+
+buffer_mox2P = 3.e3
+buffer_mox2U = buffer_mox2P * 0.9089 / 0.0911
+buffer_mox2P = str(buffer_mox2P)
+buffer_mox2U = str(buffer_mox2U)
+
+buffer_mox3P = 3.e3
+buffer_mox3U = buffer_mox3P * 0.9089 / 0.0911
+buffer_mox3P = str(buffer_mox3P)
+buffer_mox3U = str(buffer_mox3U)
+
 control = """
 <control>
-    <duration>1440</duration>
+    <duration>1200</duration>
     <startmonth>1</startmonth>
     <startyear>2000</startyear>
     <decay>lazy</decay>
@@ -354,7 +384,7 @@ control = """
                 <stream>
                     <info>
                         <mixing_ratio>0.071</mixing_ratio>
-                        <buf_size>9e3</buf_size>
+                        <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -366,7 +396,7 @@ control = """
                 <stream>
                     <info>
                         <mixing_ratio>0.819</mixing_ratio>
-                        <buf_size>1.1e5</buf_size>
+                        <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -378,7 +408,7 @@ control = """
                 <stream>
                     <info>
                       <mixing_ratio>0.110</mixing_ratio>
-                      <buf_size>1.4e4</buf_size>
+                      <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                       <item>
@@ -407,7 +437,7 @@ control = """
                 <stream>
                     <info>
                         <mixing_ratio>0.0911</mixing_ratio>
-                        <buf_size>1.2e4</buf_size>
+                        <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -419,7 +449,7 @@ control = """
                 <stream>
                     <info>
                         <mixing_ratio>0.9089</mixing_ratio>
-                        <buf_size>1.2e5</buf_size>
+                        <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -444,7 +474,7 @@ control = """
                 <stream>
                     <info>
                         <mixing_ratio>0.071</mixing_ratio>
-                        <buf_size>4.e3</buf_size>
+                        <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -460,7 +490,7 @@ control = """
                 <stream>
                     <info>
                         <mixing_ratio>0.819</mixing_ratio>
-                        <buf_size>4.6e4</buf_size>
+                        <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -476,7 +506,7 @@ control = """
                 <stream>
                     <info>
                       <mixing_ratio>0.110</mixing_ratio>
-                      <buf_size>6.2e3</buf_size>
+                      <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                       <item>
@@ -505,7 +535,7 @@ control = """
                 <stream>
                     <info>
                         <mixing_ratio>0.0911</mixing_ratio>
-                        <buf_size>6e3</buf_size>
+                        <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -526,7 +556,61 @@ control = """
                 <stream>
                     <info>
                         <mixing_ratio>0.9089</mixing_ratio>
-                        <buf_size>6e4</buf_size>
+                        <buf_size>%s</buf_size>
+                    </info>
+                    <commodities>
+                        <item>
+                            <commodity>moxu</commodity>
+                            <pref>2.0</pref>
+                        </item>
+                        <item>
+                            <commodity>lwru</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                        <item>
+                            <commodity>fru</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                    </commodities>
+                </stream>
+            </in_streams>
+            <out_commod>moxmixerout</out_commod>
+            <out_buf_size>1e9</out_buf_size>
+            <throughput>1e10</throughput>
+        </Mixer>
+    </config>
+</facility>
+
+<facility>
+    <name>moxmixer3</name>
+    <config>
+        <Mixer>
+            <in_streams>
+                <stream>
+                    <info>
+                        <mixing_ratio>0.0911</mixing_ratio>
+                        <buf_size>%s</buf_size>
+                    </info>
+                    <commodities>
+                        <item>
+                            <commodity>moxpu</commodity>
+                            <pref>2.0</pref>
+                        </item>
+                        <item>
+                            <commodity>lwrpu</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                        <item>
+                            <commodity>frpu</commodity>
+                            <pref>1.0</pref>
+                        </item>
+
+                    </commodities>
+                </stream>
+                <stream>
+                    <info>
+                        <mixing_ratio>0.9089</mixing_ratio>
+                        <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -586,7 +670,9 @@ control = """
         </Sink>
     </config>
 </facility>
-"""
+""" % (buffer_fr1P, buffer_fr1U, buffer_fr1NU, buffer_mox1P, buffer_mox1U,
+       buffer_fr2P, buffer_fr2U, buffer_fr2NU, buffer_mox2P, buffer_mox2U,
+       buffer_mox3P, buffer_mox3U)
 
 recipes = """
 <recipe>
@@ -1080,6 +1166,10 @@ for calc_method in calc_methods:
         <item>
             <facility>moxmixer2</facility>
             <commod>frpu</commod>
+        </item>      
+        <item>
+            <facility>moxmixer3</facility>
+            <commod>moxpu</commod>
         </item>
         <item>
             <facility>lwrsink</facility>
@@ -1121,19 +1211,23 @@ for calc_method in calc_methods:
         </item>
         <item>
             <facility>frmixer1</facility>
-            <capacity>9.e3</capacity>
+            <capacity>%s</capacity>
         </item>
         <item>
             <facility>moxmixer1</facility>
-            <capacity>1.2e4</capacity>
+            <capacity>%s</capacity>
         </item>
         <item>
             <facility>frmixer2</facility>
-            <capacity>4.e3</capacity>
+            <capacity>%s</capacity>
         </item>
         <item>
             <facility>moxmixer2</facility>
-            <capacity>6.e3</capacity>
+            <capacity>%s</capacity>
+        </item>
+        <item>
+            <facility>moxmixer3</facility>
+            <capacity>%s</capacity>
         </item>
         <item>
             <facility>lwrsink</facility>
@@ -1151,18 +1245,22 @@ for calc_method in calc_methods:
         <facility_pref>
         <item>
           <facility>frmixer1</facility>
-          <pref>1000-t</pref>
+          <pref>980-t</pref>
         </item>
         <item>
           <facility>moxmixer1</facility>
-          <pref>1000-t</pref>
+          <pref>980-t</pref>
         </item>
         <item>
           <facility>frmixer2</facility>
-          <pref>t-1000</pref>
+          <pref>t-980</pref>
         </item>
         <item>
           <facility>moxmixer2</facility>
+          <pref>-1*(t-980)*(t-1010)</pref>
+        </item>
+        <item>
+          <facility>moxmixer3</facility>
           <pref>t-1000</pref>
         </item>
         </facility_pref>
@@ -1172,14 +1270,14 @@ for calc_method in calc_methods:
     </institution>
 
     <name>SingleRegion</name>
-    </region>""" % (calc_method, demand_eq, buff_size, calc_method)
+    </region>""" % (calc_method, demand_eq, buff_size, calc_method,
+                    buffer_fr1P, buffer_mox1P, buffer_fr2P, buffer_mox2P,
+                    buffer_mox3P)
 
 for calc_method in calc_methods:
 
-    input_file = 'eg01-eg29-flatpower-d3ploy-buffer' + buff_size + '-' \
-        + calc_method + '.xml'
-    output_file = 'eg01-eg29-flatpower-d3ploy-buffer' + buff_size + '-' \
-        + calc_method + '.sqlite'
+    input_file = name + buff_size + '-' + calc_method + '.xml'
+    output_file = name + buff_size + '-' + calc_method + '.sqlite'
 
     with open(input_file, 'w') as f:
         f.write('<simulation>\n')
