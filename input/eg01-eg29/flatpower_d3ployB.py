@@ -30,7 +30,7 @@ ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 #calc_methods = ["ma", "arma", "arch"]
 #calc_methods = ["poly", "exp_smoothing", "holt_winters", "fft"]
 #calc_methods = ["sw_seasonal"]
-calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters",
+calc_methods = ["poly", "exp_smoothing", "holt_winters",
                 "fft"]
 
 name = 'eg01-eg29-flatpower-d3ploy-onemixer'
@@ -376,6 +376,10 @@ control = """
                             <commodity>lwrpu</commodity>
                             <pref>1.0</pref>
                         </item>
+                        <item>
+                            <commodity>frpu</commodity>
+                            <pref>1.0</pref>
+                        </item>
                     </commodities>
                 </stream>
                 <stream>
@@ -386,6 +390,10 @@ control = """
                     <commodities>
                         <item>
                             <commodity>lwru</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                        <item>
+                            <commodity>fru</commodity>
                             <pref>1.0</pref>
                         </item>
                     </commodities>
@@ -429,6 +437,14 @@ control = """
                             <commodity>lwrpu</commodity>
                             <pref>1.0</pref>
                         </item>
+                        <item>
+                            <commodity>frpu</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                        <item>
+                            <commodity>moxpu</commodity>
+                            <pref>2.0</pref>
+                        </item>
                     </commodities>
                 </stream>
                 <stream>
@@ -440,6 +456,14 @@ control = """
                         <item>
                             <commodity>lwru</commodity>
                             <pref>1.0</pref>
+                        </item>
+                        <item>
+                            <commodity>fru</commodity>
+                            <pref>1.0</pref>
+                        </item>
+                        <item>
+                            <commodity>moxu</commodity>
+                            <pref>2.0</pref>
                         </item>
                     </commodities>
                 </stream>

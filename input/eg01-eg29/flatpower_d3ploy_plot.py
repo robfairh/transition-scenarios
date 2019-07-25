@@ -76,7 +76,7 @@ all_dict = {}
 front_commods = ['sourceout', 'enrichmentout']
 back_commods = ['lwrpu', 'frpu']
 
-add = '-buffer0'
+add = '6'
 # add = sys.argv[1]
 name = 'eg01-eg29-flatpower-d3ploy' + add
 
@@ -115,12 +115,13 @@ for calc_method in calc_methods:
 
 """
 
-calc_methods1 = ["ma", "arma", "arch"]
-calc_methods2 = ["poly", "exp_smoothing", "holt_winters", "fft"]
+calc_methods1 = ["ma"]
+#calc_methods2 = ["poly", "exp_smoothing", "holt_winters", "fft"]
 #calc_methods3 = ["sw_seasonal"]
 
 for calc_method in calc_methods1:
-    output_file = name + '-' + calc_method + '.sqlite'
+    #output_file = name + '-' + calc_method + '.sqlite'
+    output_file = 'cyclus.sqlite'
     all_dict[calc_method] = tester.supply_demand_dict_driving(output_file,
                                                               demand_eq,
                                                               'power')
@@ -128,7 +129,7 @@ for calc_method in calc_methods1:
 plot_several('29-power' + add + '1', all_dict, 'power', calc_methods1,
              demand_eq)
 
-
+"""
 for calc_method in calc_methods2:
     output_file = name + '-' + calc_method + '.sqlite'
     all_dict[calc_method] = tester.supply_demand_dict_driving(output_file,
@@ -138,7 +139,7 @@ for calc_method in calc_methods2:
 plot_several('29-power' + add + '2', all_dict, 'power', calc_methods2,
              demand_eq)
 
-"""
+
 for calc_method in calc_methods3:
     output_file = name + '-' + calc_method + '.sqlite'
     all_dict[calc_method] = tester.supply_demand_dict_driving(output_file,

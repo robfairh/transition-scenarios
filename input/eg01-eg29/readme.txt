@@ -94,4 +94,9 @@ Trying with new cycamore and d3ploy.
 It is necessary to play around with the sizes of the buffers.
 Both mixers should have in total something close to the supply of the driving commodity
 for ex: lwrpu. If the supply is 21000, then one could have 13000 and the other one 8000
-Works!!
+Works!! >> just for ma :(
+
+- eg01-eg29-flatpower-d3ploy6.xml
+copy of 4 but mixers are demand driven deployed.
+fr and mox start with 1 batch instead of 3
+we try the sharing power capability
