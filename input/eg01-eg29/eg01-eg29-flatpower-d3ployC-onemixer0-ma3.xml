@@ -511,6 +511,14 @@
         <initialfacilitylist>
         <entry>
           <number>1</number>
+          <prototype>source</prototype>
+        </entry>
+        <entry>
+          <number>1</number>
+          <prototype>enrichment</prototype>
+        </entry>
+        <entry>
+          <number>1</number>
           <prototype>lwrstorage</prototype>
         </entry>
         <entry>
@@ -589,6 +597,7 @@
 
     <name>SingleRegion</name>
     </region>
+
 <recipe>
    <name>sourceoutrecipe</name>
    <basis>mass</basis>
