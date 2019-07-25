@@ -26,27 +26,29 @@ direc = os.listdir('./')
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 
-
+calc_methods = ["ma", "arma", "poly", "exp_smoothing", "fft"]
 #calc_methods = ["ma", "arma", "arch"]
-#calc_methods = ["poly", "exp_smoothing", "holt_winters", "fft"]
 #calc_methods = ["sw_seasonal"]
-calc_methods = ["poly", "exp_smoothing", "holt_winters",
-                "fft"]
+#calc_methods = ["poly", "exp_smoothing", "holt_winters",
+#                "fft"]
 
-name = 'eg01-eg29-flatpower-d3ploy-onemixer'
+name = 'eg01-eg29-flatpower-d3ployB-onemixer'
 
 demand_eq = "60000"
 buff_size = sys.argv[1]
 
 buffer_fr1P = 1.3e4
-buffer_fr1U = buffer_fr1P * 0.819 / 0.071
-buffer_fr1NU = buffer_fr1P * 0.110 / 0.071
+buffer_fr1U = (buffer_fr1P * 0.819 / 0.071) * 1.05
+#buffer_fr1U = 1.5e5
+buffer_fr1NU = (buffer_fr1P * 0.110 / 0.071) * 1.05
+#buffer_fr1NU = 2e4
 buffer_fr1P = str(buffer_fr1P)
 buffer_fr1U = str(buffer_fr1U)
 buffer_fr1NU = str(buffer_fr1NU)
 
 buffer_mox1P = 8e3
-buffer_mox1U = buffer_mox1P * 0.9089 / 0.0911
+buffer_mox1U = (buffer_mox1P * 0.9089 / 0.0911) * 1.05
+#buffer_mox1U = 8e4
 buffer_mox1P = str(buffer_mox1P)
 buffer_mox1U = str(buffer_mox1U)
 
@@ -443,7 +445,7 @@ control = """
                         </item>
                         <item>
                             <commodity>moxpu</commodity>
-                            <pref>2.0</pref>
+                            <pref>1.0</pref>
                         </item>
                     </commodities>
                 </stream>
@@ -463,7 +465,7 @@ control = """
                         </item>
                         <item>
                             <commodity>moxu</commodity>
-                            <pref>2.0</pref>
+                            <pref>1.0</pref>
                         </item>
                     </commodities>
                 </stream>
@@ -832,26 +834,14 @@ for calc_method in calc_methods:
         <config>
             <DeployInst>
             <prototypes>
-                <val>lwr</val> 
-                <val>lwr</val> 
-                <val>lwr</val> 
-                <val>lwr</val> 
-                <val>lwr</val> 
-                <val>lwr</val> 
-                <val>lwr</val> 
-                <val>lwr</val> 
-                <val>lwr</val> 
-                <val>lwr</val> 
-                <val>lwr</val> 
-                <val>lwr</val> 
-            </prototypes> 
+                <val>lwr</val>
+                <val>lwr</val>
+                <val>lwr</val>
+                <val>lwr</val>
+                <val>lwr</val>
+                <val>lwr</val>
+            </prototypes>
             <build_times>
-                <val>1</val> 
-                <val>1</val> 
-                <val>1</val> 
-                <val>1</val> 
-                <val>1</val> 
-                <val>1</val> 
                 <val>1</val> 
                 <val>1</val> 
                 <val>1</val> 
@@ -860,32 +850,20 @@ for calc_method in calc_methods:
                 <val>1</val> 
             </build_times> 
             <n_build>
-                <val>6</val> 
-                <val>6</val> 
-                <val>6</val> 
-                <val>6</val> 
-                <val>6</val> 
-                <val>6</val> 
-                <val>4</val> 
-                <val>4</val> 
-                <val>4</val> 
-                <val>4</val> 
-                <val>4</val> 
-                <val>4</val> 
+                <val>10</val> 
+                <val>10</val> 
+                <val>10</val> 
+                <val>10</val> 
+                <val>10</val> 
+                <val>10</val> 
             </n_build> 
             <lifetimes>
                 <val>960</val> 
-                <val>970</val> 
                 <val>980</val> 
-                <val>990</val> 
                 <val>1000</val> 
-                <val>1010</val> 
                 <val>1020</val> 
-                <val>1030</val> 
                 <val>1040</val> 
-                <val>1050</val> 
                 <val>1060</val> 
-                <val>1070</val> 
             </lifetimes>
             </DeployInst>
         </config>
@@ -935,13 +913,23 @@ for calc_method in calc_methods:
         <facility_pref>
         <item>
           <facility>fr</facility>
-          <pref>-1*(t-959)*(t-1012)</pref>
+          <pref>(t-959)/np.abs(t-959)</pref>
         </item>
         <item>
           <facility>moxlwr</facility>
-          <pref>t-1000</pref>
+          <pref>(t-959)/np.abs(t-959)</pref>
         </item>
         </facility_pref>
+        <facility_sharing>
+        <item>
+            <facility>fr</facility>
+            <percentage>60</percentage>
+        </item>
+        <item>
+            <facility>moxlwr</facility>
+            <percentage>40</percentage>
+        </item>
+        </facility_sharing>
         <buffer_type>
         <item>
             <commod>POWER</commod>

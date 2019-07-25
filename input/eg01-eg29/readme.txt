@@ -100,3 +100,7 @@ Works!! >> just for ma :(
 copy of 4 but mixers are demand driven deployed.
 fr and mox start with 1 batch instead of 3
 we try the sharing power capability
+it works for ma --> eg01-eg29-flatpower-d3ploy6_ma.xml
+
+- eg01-eg29-flatpower-d3ploy7_ma.xml
+make the mixers demand_driven
