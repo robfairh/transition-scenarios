@@ -1,7 +1,7 @@
 <simulation>
 
 <control>
-    <duration>1440</duration>
+    <duration>10</duration>
     <startmonth>1</startmonth>
     <startyear>2000</startyear>
     <decay>lazy</decay>
@@ -561,7 +561,8 @@
     <config>
     <DemandDrivenDeploymentInst>
         <calc_method>ma</calc_method>
-        <demand_eq>61000</demand_eq>
+        <demand_eq>60000</demand_eq>
+        <driving_commod>POWER</driving_commod>
         <facility_commod>
         <item>
           <facility>source</facility>
