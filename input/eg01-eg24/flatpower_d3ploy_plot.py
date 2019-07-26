@@ -40,14 +40,14 @@ def plot_several(name, all_dict, commod, calc_methods, demand_eq):
         ax.semilogy(*zip(*sorted(dict_supply[calc_method].items())), 'x',
                 label=calc_method + ' Supply', markersize=4) 
 
-    ax.set_xlabel('Time (month timestep)', fontsize=14)
+    ax.set_xlabel('Time (month timestep)', fontsize=21)
     if commod.lower() == 'power':
-        ax.set_ylabel('Power (MW)', fontsize=14)
+        ax.set_ylabel('Power (MW)', fontsize=21)
     else:
-        ax.set_ylabel('Mass (Kg)', fontsize=14)
+        ax.set_ylabel('Mass (Kg)', fontsize=21)
 
     handles, labels = ax.get_legend_handles_labels()
-    ax.legend(handles, labels, fontsize=11, loc='upper center',
+    ax.legend(handles, labels, fontsize=18, loc='upper center',
               bbox_to_anchor=(1.1, 1.0), fancybox=True)
    
     plt.minorticks_off()
@@ -75,7 +75,7 @@ all_dict = {}
 front_commods = ['sourceout', 'enrichmentout']
 back_commods = ['lwrtru', 'frtru']
 
-add = '-buffer2000'
+add = '-bufferB2000'
 #add = sys.argv[1]
 name = 'eg01-eg24-flatpower-d3ploy' + add
 
