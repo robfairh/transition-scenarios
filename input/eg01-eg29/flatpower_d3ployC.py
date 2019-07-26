@@ -1,7 +1,61 @@
-<simulation>
+"""
+Running this script generates .xml files and runs them producing the .sqlite
+files for all the prediction methods.
+The user can choose a demand equation (demand_eq) and a buffer size
+(buff_size). The buffer plays its role one time step before the transition
+starts. The transition starts at after 960 time steps (80 years).
+"""
 
+import json
+import re
+import subprocess
+import os
+import sqlite3 as lite
+import copy
+import glob
+import sys
+from matplotlib import pyplot as plt
+import numpy as np
+import pandas as pd
+import d3ploy.tester as tester
+import d3ploy.plotter as plotter
+import collections
+
+direc = os.listdir('./')
+
+ENV = dict(os.environ)
+ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
+
+calc_methods = ["ma", "arma", "poly", "exp_smoothing", "fft"]
+#calc_methods = ["ma", "arma", "arch"]
+#calc_methods = ["sw_seasonal"]
+#calc_methods = ["poly", "exp_smoothing", "holt_winters",
+#                "fft"]
+
+name = 'eg01-eg29-flatpower-d3ployC-onemixer'
+
+demand_eq = "60000"
+buff_size = sys.argv[1]
+
+thro_frmixer1 = 2e3
+buffer_fr1P = thro_frmixer1 / (1.0 + 0.819 / 0.071 + 0.110 / 0.071)
+buffer_fr1U = (buffer_fr1P * 0.819 / 0.071) * 1.05
+buffer_fr1NU = (buffer_fr1P * 0.110 / 0.071) * 1.05
+thro_frmixer1 = str(thro_frmixer1)
+buffer_fr1P = str(buffer_fr1P)
+buffer_fr1U = str(buffer_fr1U)
+buffer_fr1NU = str(buffer_fr1NU)
+
+thro_moxmixer1 = 4e3
+buffer_mox1P = thro_moxmixer1 / (1.0 + 0.9089 / 0.0911)
+buffer_mox1U = (buffer_mox1P * 0.9089 / 0.0911) * 1.05
+thro_moxmixer1 = str(thro_moxmixer1)
+buffer_mox1P = str(buffer_mox1P)
+buffer_mox1U = str(buffer_mox1U)
+
+control = """
 <control>
-    <duration>200</duration>
+    <duration>1440</duration>
     <startmonth>1</startmonth>
     <startyear>2000</startyear>
     <decay>lazy</decay>
@@ -94,7 +148,7 @@
             <cycle_time>18</cycle_time>
             <refuel_time>0</refuel_time>
             <assem_size>29863.3</assem_size>
-            <n_assem_core>1</n_assem_core>
+            <n_assem_core>3</n_assem_core>
             <n_assem_batch>1</n_assem_batch>
             <power_cap>1000</power_cap>
         </Reactor>
@@ -132,7 +186,7 @@
             <cycle_time>18</cycle_time>
             <refuel_time>0</refuel_time>
             <assem_size>33130</assem_size>
-            <n_assem_core>3</n_assem_core>
+            <n_assem_core>1</n_assem_core>
             <n_assem_batch>1</n_assem_batch>
             <power_cap>1000</power_cap>
         </Reactor>
@@ -318,7 +372,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.071</mixing_ratio>
-                        <buf_size>142.0</buf_size>
+                        <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -334,7 +388,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.819</mixing_ratio>
-                        <buf_size>1719.9</buf_size>
+                        <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -350,7 +404,7 @@
                 <stream>
                     <info>
                       <mixing_ratio>0.110</mixing_ratio>
-                      <buf_size>231.0</buf_size>
+                      <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                       <item>
@@ -365,7 +419,7 @@
                 </stream>
             </in_streams>
             <out_commod>frmixerout</out_commod>
-            <throughput>2000.0</throughput>
+            <throughput>%s</throughput>
         </Mixer>
     </config>
 </facility>
@@ -378,7 +432,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.0911</mixing_ratio>
-                        <buf_size>364.4</buf_size>
+                        <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -398,7 +452,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.9089</mixing_ratio>
-                        <buf_size>3817.3799999999997</buf_size>
+                        <buf_size>%s</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -417,7 +471,7 @@
                 </stream>
             </in_streams>
             <out_commod>moxmixerout</out_commod>
-            <throughput>4000.0</throughput>
+            <throughput>%s</throughput>
         </Mixer>
     </config>
 </facility>
@@ -457,139 +511,10 @@
         </Sink>
     </config>
 </facility>
+""" % (buffer_fr1P, buffer_fr1U, buffer_fr1NU, thro_frmixer1,
+       buffer_mox1P, buffer_mox1U, thro_moxmixer1)
 
-    <region>
-    <config>
-        <NullRegion>
-        </NullRegion>
-    </config>
-
-    <institution> 
-        <name>lwr_inst</name>
-        <config>
-            <DeployInst>
-            <prototypes>
-                <val>lwr</val>
-                <val>lwr</val>
-                <val>lwr</val>
-                <val>lwr</val>
-                <val>lwr</val>
-                <val>lwr</val>
-            </prototypes>
-            <build_times>
-                <val>1</val> 
-                <val>1</val> 
-                <val>1</val> 
-                <val>1</val> 
-                <val>1</val> 
-                <val>1</val> 
-            </build_times> 
-            <n_build>
-                <val>10</val> 
-                <val>10</val> 
-                <val>10</val> 
-                <val>10</val> 
-                <val>10</val> 
-                <val>10</val> 
-            </n_build> 
-            <lifetimes>
-                <val>960</val> 
-                <val>980</val> 
-                <val>1000</val> 
-                <val>1020</val> 
-                <val>1040</val> 
-                <val>1060</val> 
-            </lifetimes>
-            </DeployInst>
-        </config>
-    </institution>
-
-    <institution>
-        <config>
-            <NullInst/>
-        </config>
-        <initialfacilitylist>
-        <entry>
-          <number>1</number>
-          <prototype>lwrstorage</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>frstorage</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxstorage</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>lwrreprocessing</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>frreprocessing</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxreprocessing</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>frmixer1</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxmixer1</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>lwrsink</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>frsink</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxsink</prototype>
-        </entry> 
-        </initialfacilitylist>
-        <name>sink_source_facilities</name>
-    </institution>
-
-    <institution>
-    <config>
-    <DemandDrivenDeploymentInst>
-        <calc_method>ma</calc_method>
-        <demand_eq>60000</demand_eq>
-        <facility_commod>
-        <item>
-          <facility>source</facility>
-          <commod>sourceout</commod>
-        </item>
-        <item>
-          <facility>enrichment</facility>
-          <commod>enrichmentout</commod>
-        </item>
-        </facility_commod>
-        <facility_capacity>
-        <item>
-          <facility>source</facility>
-          <capacity>1e8</capacity>
-        </item>    
-        <item>
-          <facility>enrichment</facility>
-          <capacity>1e100</capacity>
-        </item>
-        </facility_capacity>
-    </DemandDrivenDeploymentInst>
-    </config>
-    <name>timeseriesinst</name>
-    </institution>
-
-    <name>SingleRegion</name>
-    </region>
-
+recipes = """
 <recipe>
    <name>sourceoutrecipe</name>
    <basis>mass</basis>
@@ -892,4 +817,252 @@
     <nuclide> <id>Cf252</id>  <comp>6.535079715265006e-10</comp> </nuclide> 
     <nuclide> <id>Np237</id>  <comp>0.375539415087</comp> </nuclide> 
 </recipe>
-</simulation>
+"""
+
+region = {}
+
+for calc_method in calc_methods:
+    region[calc_method] = """
+    <region>
+    <config>
+        <NullRegion>
+        </NullRegion>
+    </config>
+
+    <institution> 
+        <name>lwr_inst</name>
+        <config>
+            <DeployInst>
+            <prototypes>
+                <val>lwr</val>
+                <val>lwr</val>
+                <val>lwr</val>
+                <val>lwr</val>
+                <val>lwr</val>
+                <val>lwr</val>
+            </prototypes>
+            <build_times>
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+                <val>1</val> 
+            </build_times> 
+            <n_build>
+                <val>10</val> 
+                <val>10</val> 
+                <val>10</val> 
+                <val>10</val> 
+                <val>10</val> 
+                <val>10</val> 
+            </n_build> 
+            <lifetimes>
+                <val>960</val> 
+                <val>980</val> 
+                <val>1000</val> 
+                <val>1020</val> 
+                <val>1040</val> 
+                <val>1060</val> 
+            </lifetimes>
+            </DeployInst>
+        </config>
+    </institution>
+
+    <institution>
+    <config>
+    <DemandDrivenDeploymentInst>
+        <calc_method>%s</calc_method>
+        <demand_eq>%s</demand_eq>
+        <facility_commod>
+        <item>
+          <facility>source</facility>
+          <commod>sourceout</commod>
+        </item>
+        <item>
+          <facility>enrichment</facility>
+          <commod>enrichmentout</commod>
+        </item>
+        <item>
+          <facility>fr</facility>
+          <commod>POWER</commod>
+        </item>
+        <item>
+          <facility>moxlwr</facility>
+          <commod>POWER</commod>
+        </item>
+        <item>
+          <facility>frmixer1</facility>
+          <commod>frmixerout</commod>
+        </item>
+        <item>
+          <facility>moxmixer1</facility>
+          <commod>moxmixerout</commod>
+        </item>
+        </facility_commod>
+        <facility_capacity>
+        <item>
+          <facility>source</facility>
+          <capacity>1e8</capacity>
+        </item>    
+        <item>
+          <facility>enrichment</facility>
+          <capacity>1e100</capacity>
+        </item>
+        <item>
+          <facility>fr</facility>
+          <capacity>333.34</capacity>
+        </item>
+        <item>
+          <facility>moxlwr</facility>
+          <capacity>1000</capacity>
+        </item>
+        <item>
+          <facility>frmixer1</facility>
+          <capacity>%s</capacity>
+        </item>
+        <item>
+          <facility>moxmixer1</facility>
+          <capacity>%s</capacity>
+        </item>
+        </facility_capacity>
+        <facility_pref>
+        <item>
+          <facility>fr</facility>
+          <pref>(t-959)/np.abs(t-959)</pref>
+        </item>
+        <item>
+          <facility>moxlwr</facility>
+          <pref>(t-959)/np.abs(t-959)</pref>
+        </item>
+        </facility_pref>
+        <facility_sharing>
+        <item>
+            <facility>fr</facility>
+            <percentage>60</percentage>
+        </item>
+        <item>
+            <facility>moxlwr</facility>
+            <percentage>40</percentage>
+        </item>
+        </facility_sharing>
+        <buffer_type>
+        <item>
+            <commod>POWER</commod>
+            <type>abs</type>
+        </item>
+        </buffer_type>
+        <supply_buffer>
+        <item>
+            <commod>POWER</commod>
+            <buffer>%s</buffer>
+        </item>
+        </supply_buffer>
+    </DemandDrivenDeploymentInst>
+    </config>
+    <name>timeseriesinst</name>
+    </institution>
+
+    <institution>
+    <config>
+    <SupplyDrivenDeploymentInst>
+        <calc_method>%s</calc_method>
+        <facility_commod>
+        <item>
+            <facility>lwrstorage</facility>
+            <commod>lwrout</commod>
+        </item>
+        <item>
+            <facility>frstorage</facility>
+            <commod>frout</commod>
+        </item>
+        <item>
+            <facility>moxstorage</facility>
+            <commod>moxout</commod>
+        </item>
+        <item>
+            <facility>lwrreprocessing</facility>
+            <commod>lwrstorageout</commod>
+        </item>
+        <item>
+            <facility>frreprocessing</facility>
+            <commod>frstorageout</commod>
+        </item>
+        <item>
+            <facility>moxreprocessing</facility>
+            <commod>moxstorageout</commod>
+        </item>
+        <item>
+            <facility>lwrsink</facility>
+            <commod>lwrreprocessingwaste</commod>
+        </item>
+        <item>
+            <facility>frsink</facility>
+            <commod>frreprocessingwaste</commod>
+        </item>
+        <item>
+            <facility>moxsink</facility>
+            <commod>moxreprocessingwaste</commod>
+        </item>
+        </facility_commod>
+        <facility_capacity>
+        <item>
+            <facility>lwrstorage</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>frstorage</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>moxstorage</facility>
+            <capacity>1e8</capacity>
+        </item>
+            <item>
+            <facility>lwrreprocessing</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>frreprocessing</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>moxreprocessing</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>lwrsink</facility>
+            <capacity>1e20</capacity>
+        </item>
+        <item>
+            <facility>frsink</facility>
+            <capacity>1e20</capacity>
+        </item>
+        <item>
+            <facility>moxsink</facility>
+            <capacity>1e20</capacity>
+        </item>
+        </facility_capacity>
+    </SupplyDrivenDeploymentInst>
+    </config>
+    <name>supplydrivendeploymentinst</name>
+    </institution>
+
+    <name>SingleRegion</name>
+    </region>""" % (calc_method, demand_eq, thro_frmixer1, thro_moxmixer1,
+                    buff_size, calc_method)
+
+for calc_method in calc_methods:
+
+    input_file = name + buff_size + '-' + calc_method + '.xml'
+    output_file = name + buff_size + '-' + calc_method + '.sqlite'
+
+    with open(input_file, 'w') as f:
+        f.write('<simulation>\n')
+        f.write(control)
+        f.write(region[calc_method])
+        f.write(recipes)
+        f.write('</simulation>')
+
+    s = subprocess.check_output(['cyclus', '-o', output_file, input_file],
+                                universal_newlines=True, env=ENV)

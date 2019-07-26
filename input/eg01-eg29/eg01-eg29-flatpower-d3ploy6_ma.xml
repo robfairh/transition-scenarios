@@ -1,17 +1,18 @@
 <simulation>
 
 <control>
-    <duration>200</duration>
+    <duration>1440</duration>
     <startmonth>1</startmonth>
     <startyear>2000</startyear>
     <decay>lazy</decay>
 </control>
+
 <archetypes>
         <spec>
             <lib>cycamore</lib>
             <name>Source</name>
         </spec>
-        <spec>
+		<spec>
             <lib>cycamore</lib>
             <name>Enrichment</name>
         </spec>
@@ -27,7 +28,7 @@
             <lib>cycamore</lib>
             <name>Separations</name>
         </spec>
-        <spec>
+		<spec>
             <lib>cycamore</lib>
             <name>Mixer</name>
         </spec>
@@ -94,7 +95,7 @@
             <cycle_time>18</cycle_time>
             <refuel_time>0</refuel_time>
             <assem_size>29863.3</assem_size>
-            <n_assem_core>1</n_assem_core>
+            <n_assem_core>3</n_assem_core>
             <n_assem_batch>1</n_assem_batch>
             <power_cap>1000</power_cap>
         </Reactor>
@@ -113,7 +114,7 @@
             <cycle_time>12</cycle_time>
             <refuel_time>0</refuel_time>
             <assem_size>3950</assem_size>
-            <n_assem_core>1</n_assem_core>
+            <n_assem_core>4</n_assem_core>
             <n_assem_batch>1</n_assem_batch>
             <power_cap>333.34</power_cap>
         </Reactor>
@@ -311,14 +312,14 @@
 </facility>
 
 <facility>
-    <name>frmixer1</name>
+    <name>frmixer</name>
     <config>
         <Mixer>
             <in_streams>
                 <stream>
                     <info>
                         <mixing_ratio>0.071</mixing_ratio>
-                        <buf_size>142.0</buf_size>
+                        <buf_size>1.3e4</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -334,7 +335,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.819</mixing_ratio>
-                        <buf_size>1719.9</buf_size>
+                        <buf_size>1.5e5</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -350,7 +351,7 @@
                 <stream>
                     <info>
                       <mixing_ratio>0.110</mixing_ratio>
-                      <buf_size>231.0</buf_size>
+                      <buf_size>2e4</buf_size>
                     </info>
                     <commodities>
                       <item>
@@ -365,20 +366,21 @@
                 </stream>
             </in_streams>
             <out_commod>frmixerout</out_commod>
-            <throughput>2000.0</throughput>
+            <out_buf_size>1e8</out_buf_size>
+            <throughput>1e10</throughput>
         </Mixer>
     </config>
 </facility>
 
 <facility>
-    <name>moxmixer1</name>
+    <name>moxmixer</name>
     <config>
         <Mixer>
             <in_streams>
                 <stream>
                     <info>
                         <mixing_ratio>0.0911</mixing_ratio>
-                        <buf_size>364.4</buf_size>
+                        <buf_size>8e3</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -398,7 +400,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.9089</mixing_ratio>
-                        <buf_size>3817.3799999999997</buf_size>
+                        <buf_size>8e4</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -417,7 +419,8 @@
                 </stream>
             </in_streams>
             <out_commod>moxmixerout</out_commod>
-            <throughput>4000.0</throughput>
+            <out_buf_size>1e9</out_buf_size>
+            <throughput>1e10</throughput>
         </Mixer>
     </config>
 </facility>
@@ -458,7 +461,7 @@
     </config>
 </facility>
 
-    <region>
+<region>
     <config>
         <NullRegion>
         </NullRegion>
@@ -505,59 +508,6 @@
     </institution>
 
     <institution>
-        <config>
-            <NullInst/>
-        </config>
-        <initialfacilitylist>
-        <entry>
-          <number>1</number>
-          <prototype>lwrstorage</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>frstorage</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxstorage</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>lwrreprocessing</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>frreprocessing</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxreprocessing</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>frmixer1</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxmixer1</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>lwrsink</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>frsink</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxsink</prototype>
-        </entry> 
-        </initialfacilitylist>
-        <name>sink_source_facilities</name>
-    </institution>
-
-    <institution>
     <config>
     <DemandDrivenDeploymentInst>
         <calc_method>ma</calc_method>
@@ -571,6 +521,14 @@
           <facility>enrichment</facility>
           <commod>enrichmentout</commod>
         </item>
+        <item>
+          <facility>fr</facility>
+          <commod>POWER</commod>
+        </item>
+        <item>
+          <facility>moxlwr</facility>
+          <commod>POWER</commod>
+        </item>
         </facility_commod>
         <facility_capacity>
         <item>
@@ -581,14 +539,143 @@
           <facility>enrichment</facility>
           <capacity>1e100</capacity>
         </item>
+        <item>
+          <facility>fr</facility>
+          <capacity>333.34</capacity>
+        </item>
+        <item>
+          <facility>moxlwr</facility>
+          <capacity>1000</capacity>
+        </item>
         </facility_capacity>
+        <facility_pref>
+        <item>
+          <facility>fr</facility>
+          <pref>(t-959)/np.abs(t-959)</pref>
+        </item>
+        <item>
+          <facility>moxlwr</facility>
+          <pref>(t-959)/np.abs(t-959)</pref>
+        </item>
+        </facility_pref>
+        <facility_sharing>
+        <item>
+            <facility>fr</facility>
+            <percentage>60</percentage>
+        </item>
+        <item>
+            <facility>moxlwr</facility>
+            <percentage>40</percentage>
+        </item>
+        </facility_sharing>
     </DemandDrivenDeploymentInst>
     </config>
     <name>timeseriesinst</name>
     </institution>
 
+    <institution>
+    <config>
+    <SupplyDrivenDeploymentInst>
+        <calc_method>ma</calc_method>
+        <facility_commod>
+        <item>
+            <facility>lwrstorage</facility>
+            <commod>lwrout</commod>
+        </item>
+        <item>
+            <facility>frstorage</facility>
+            <commod>frout</commod>
+        </item>
+        <item>
+            <facility>moxstorage</facility>
+            <commod>moxout</commod>
+        </item>
+        <item>
+            <facility>lwrreprocessing</facility>
+            <commod>lwrstorageout</commod>
+        </item>
+        <item>
+            <facility>frreprocessing</facility>
+            <commod>frstorageout</commod>
+        </item>
+        <item>
+            <facility>moxreprocessing</facility>
+            <commod>moxstorageout</commod>
+        </item>
+        <item>
+            <facility>frmixer</facility>
+            <commod>lwrpu</commod>
+        </item>
+        <item>
+            <facility>moxmixer</facility>
+            <commod>lwrpu</commod>
+        </item>
+        <item>
+            <facility>lwrsink</facility>
+            <commod>lwrreprocessingwaste</commod>
+        </item>
+        <item>
+            <facility>frsink</facility>
+            <commod>frreprocessingwaste</commod>
+        </item>
+        <item>
+            <facility>moxsink</facility>
+            <commod>moxreprocessingwaste</commod>
+        </item>
+        </facility_commod>
+        <facility_capacity>
+        <item>
+            <facility>lwrstorage</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>frstorage</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>moxstorage</facility>
+            <capacity>1e8</capacity>
+        </item>
+            <item>
+            <facility>lwrreprocessing</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>frreprocessing</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>moxreprocessing</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>frmixer</facility>
+            <capacity>1.3e4</capacity>
+        </item>
+        <item>
+            <facility>moxmixer</facility>
+            <capacity>8e3</capacity>
+        </item>
+        <item>
+            <facility>lwrsink</facility>
+            <capacity>1e20</capacity>
+        </item>
+        <item>
+            <facility>frsink</facility>
+            <capacity>1e20</capacity>
+        </item>
+        <item>
+            <facility>moxsink</facility>
+            <capacity>1e20</capacity>
+        </item>
+        </facility_capacity>
+    </SupplyDrivenDeploymentInst>
+    </config>
+    <name>supplydrivendeploymentinst</name>
+    </institution>
+
     <name>SingleRegion</name>
-    </region>
+</region>
 
 <recipe>
    <name>sourceoutrecipe</name>
@@ -598,91 +685,91 @@
 </recipe>
  
 <recipe>
-    <name>lwrinrecipe</name>
-    <basis>mass</basis>
-    <nuclide> <id>U234</id>  <comp>0.0002558883</comp> </nuclide> 
-    <nuclide> <id>U235</id>  <comp>0.0319885317</comp> </nuclide> 
-    <nuclide> <id>U238</id>  <comp>0.96775558</comp> </nuclide> 
+	<name>lwrinrecipe</name>
+	<basis>mass</basis>
+	<nuclide> <id>U234</id>  <comp>0.0002558883</comp> </nuclide> 
+	<nuclide> <id>U235</id>  <comp>0.0319885317</comp> </nuclide> 
+	<nuclide> <id>U238</id>  <comp>0.96775558</comp> </nuclide> 
 </recipe> 
 
 <recipe>
-    <name>lwroutrecipe</name>
-    <basis>mass</basis>
-    <nuclide> <id>He4</id>  <comp>9.47457840128509E-07</comp> </nuclide> 
-    <nuclide> <id>Ra226</id>  <comp>9.78856442957042E-14</comp> </nuclide> 
-    <nuclide> <id>Ra228</id>  <comp>2.75087759176098E-20</comp> </nuclide> 
-    <nuclide> <id>Pb206</id>  <comp>5.57475193532078E-18</comp> </nuclide> 
-    <nuclide> <id>Pb207</id>  <comp>1.68592497990149E-15</comp> </nuclide> 
-    <nuclide> <id>Pb208</id>  <comp>3.6888358546006E-12</comp> </nuclide> 
-    <nuclide> <id>Pb210</id>  <comp>3.02386544437848E-19</comp> </nuclide> 
-    <nuclide> <id>Th228</id>  <comp>8.47562285269577E-12</comp> </nuclide> 
-    <nuclide> <id>Th229</id>  <comp>2.72787861516683E-12</comp> </nuclide> 
-    <nuclide> <id>Th230</id>  <comp>2.6258831537493E-09</comp> </nuclide> 
-    <nuclide> <id>Th232</id>  <comp>4.17481422959E-10</comp> </nuclide> 
-    <nuclide> <id>Bi209</id>  <comp>6.60770597104927E-16</comp> </nuclide> 
-    <nuclide> <id>Ac227</id>  <comp>3.0968621961773E-14</comp> </nuclide> 
-    <nuclide> <id>Pa231</id>  <comp>9.24658854635179E-10</comp> </nuclide> 
-    <nuclide> <id>U232</id>  <comp>0.000000001</comp> </nuclide> 
-    <nuclide> <id>U233</id>  <comp>2.21390148606282E-09</comp> </nuclide> 
-    <nuclide> <id>U234</id>  <comp>0.0001718924</comp> </nuclide> 
-    <nuclide> <id>U235</id>  <comp>0.0076486597</comp> </nuclide> 
-    <nuclide> <id>U236</id>  <comp>0.0057057461</comp> </nuclide> 
-    <nuclide> <id>U238</id>  <comp>0.9208590237</comp> </nuclide> 
-    <nuclide> <id>Np237</id>  <comp>0.0006091729</comp> </nuclide> 
-    <nuclide> <id>Pu238</id>  <comp>0.000291487</comp> </nuclide> 
-    <nuclide> <id>Pu239</id>  <comp>0.0060657301</comp> </nuclide> 
-    <nuclide> <id>Pu240</id>  <comp>0.0029058707</comp> </nuclide> 
-    <nuclide> <id>Pu241</id>  <comp>0.0017579218</comp> </nuclide> 
-    <nuclide> <id>Pu242</id>  <comp>0.0008638616</comp> </nuclide> 
-    <nuclide> <id>Pu244</id>  <comp>2.86487251922763E-08</comp> </nuclide> 
-    <nuclide> <id>Am241</id>  <comp>6.44271331287386E-05</comp> </nuclide> 
-    <nuclide> <id>Am242m</id>  <comp>8.53362027193319E-07</comp> </nuclide> 
-    <nuclide> <id>Am243</id>  <comp>0.0001983912</comp> </nuclide> 
-    <nuclide> <id>Cm242</id>  <comp>2.58988475560194E-05</comp> </nuclide> 
-    <nuclide> <id>Cm243</id>  <comp>0.000000771</comp> </nuclide> 
-    <nuclide> <id>Cm244</id>  <comp>8.5616190260478E-05</comp> </nuclide> 
-    <nuclide> <id>Cm245</id>  <comp>5.72174539442251E-06</comp> </nuclide> 
-    <nuclide> <id>Cm246</id>  <comp>7.29567535786554E-07</comp> </nuclide> 
-    <nuclide> <id>Cm247</id>  <comp>0.00000001</comp> </nuclide> 
-    <nuclide> <id>Cm248</id>  <comp>7.69165773748653E-10</comp> </nuclide> 
-    <nuclide> <id>Cm250</id>  <comp>4.2808095130239E-18</comp> </nuclide> 
-    <nuclide> <id>Cf249</id>  <comp>1.64992658175413E-12</comp> </nuclide> 
-    <nuclide> <id>Cf250</id>  <comp>2.04190913935875E-12</comp> </nuclide> 
-    <nuclide> <id>Cf251</id>  <comp>9.86556100338561E-13</comp> </nuclide> 
-    <nuclide> <id>Cf252</id>  <comp>6.57970721693466E-13</comp> </nuclide> 
-    <nuclide> <id>H3</id>  <comp>8.58461800264195E-08</comp> </nuclide> 
-    <nuclide> <id>C14</id>  <comp>4.05781943561107E-11</comp> </nuclide> 
-    <nuclide> <id>Kr81</id>  <comp>4.21681236076192E-11</comp> </nuclide> 
-    <nuclide> <id>Kr85</id>  <comp>3.44484671160181E-05</comp> </nuclide> 
-    <nuclide> <id>Sr90</id>  <comp>0.0007880649</comp> </nuclide> 
-    <nuclide> <id>Tc99</id>  <comp>0.0011409492</comp> </nuclide> 
-    <nuclide> <id>I129</id>  <comp>0.0002731878</comp> </nuclide> 
-    <nuclide> <id>Cs134</id>  <comp>0.0002300898</comp> </nuclide> 
-    <nuclide> <id>Cs135</id>  <comp>0.0006596706</comp> </nuclide> 
-    <nuclide> <id>Cs137</id>  <comp>0.0018169192</comp> </nuclide> 
-    <nuclide> <id>H1</id>  <comp>0.0477938151</comp> </nuclide> 
+	<name>lwroutrecipe</name>
+	<basis>mass</basis>
+	<nuclide> <id>He4</id>  <comp>9.47457840128509E-07</comp> </nuclide> 
+	<nuclide> <id>Ra226</id>  <comp>9.78856442957042E-14</comp> </nuclide> 
+	<nuclide> <id>Ra228</id>  <comp>2.75087759176098E-20</comp> </nuclide> 
+	<nuclide> <id>Pb206</id>  <comp>5.57475193532078E-18</comp> </nuclide> 
+	<nuclide> <id>Pb207</id>  <comp>1.68592497990149E-15</comp> </nuclide> 
+	<nuclide> <id>Pb208</id>  <comp>3.6888358546006E-12</comp> </nuclide> 
+	<nuclide> <id>Pb210</id>  <comp>3.02386544437848E-19</comp> </nuclide> 
+	<nuclide> <id>Th228</id>  <comp>8.47562285269577E-12</comp> </nuclide> 
+	<nuclide> <id>Th229</id>  <comp>2.72787861516683E-12</comp> </nuclide> 
+	<nuclide> <id>Th230</id>  <comp>2.6258831537493E-09</comp> </nuclide> 
+	<nuclide> <id>Th232</id>  <comp>4.17481422959E-10</comp> </nuclide> 
+	<nuclide> <id>Bi209</id>  <comp>6.60770597104927E-16</comp> </nuclide> 
+	<nuclide> <id>Ac227</id>  <comp>3.0968621961773E-14</comp> </nuclide> 
+	<nuclide> <id>Pa231</id>  <comp>9.24658854635179E-10</comp> </nuclide> 
+	<nuclide> <id>U232</id>  <comp>0.000000001</comp> </nuclide> 
+	<nuclide> <id>U233</id>  <comp>2.21390148606282E-09</comp> </nuclide> 
+	<nuclide> <id>U234</id>  <comp>0.0001718924</comp> </nuclide> 
+	<nuclide> <id>U235</id>  <comp>0.0076486597</comp> </nuclide> 
+	<nuclide> <id>U236</id>  <comp>0.0057057461</comp> </nuclide> 
+	<nuclide> <id>U238</id>  <comp>0.9208590237</comp> </nuclide> 
+	<nuclide> <id>Np237</id>  <comp>0.0006091729</comp> </nuclide> 
+	<nuclide> <id>Pu238</id>  <comp>0.000291487</comp> </nuclide> 
+	<nuclide> <id>Pu239</id>  <comp>0.0060657301</comp> </nuclide> 
+	<nuclide> <id>Pu240</id>  <comp>0.0029058707</comp> </nuclide> 
+	<nuclide> <id>Pu241</id>  <comp>0.0017579218</comp> </nuclide> 
+	<nuclide> <id>Pu242</id>  <comp>0.0008638616</comp> </nuclide> 
+	<nuclide> <id>Pu244</id>  <comp>2.86487251922763E-08</comp> </nuclide> 
+	<nuclide> <id>Am241</id>  <comp>6.44271331287386E-05</comp> </nuclide> 
+	<nuclide> <id>Am242m</id>  <comp>8.53362027193319E-07</comp> </nuclide> 
+	<nuclide> <id>Am243</id>  <comp>0.0001983912</comp> </nuclide> 
+	<nuclide> <id>Cm242</id>  <comp>2.58988475560194E-05</comp> </nuclide> 
+	<nuclide> <id>Cm243</id>  <comp>0.000000771</comp> </nuclide> 
+	<nuclide> <id>Cm244</id>  <comp>8.5616190260478E-05</comp> </nuclide> 
+	<nuclide> <id>Cm245</id>  <comp>5.72174539442251E-06</comp> </nuclide> 
+	<nuclide> <id>Cm246</id>  <comp>7.29567535786554E-07</comp> </nuclide> 
+	<nuclide> <id>Cm247</id>  <comp>0.00000001</comp> </nuclide> 
+	<nuclide> <id>Cm248</id>  <comp>7.69165773748653E-10</comp> </nuclide> 
+	<nuclide> <id>Cm250</id>  <comp>4.2808095130239E-18</comp> </nuclide> 
+	<nuclide> <id>Cf249</id>  <comp>1.64992658175413E-12</comp> </nuclide> 
+	<nuclide> <id>Cf250</id>  <comp>2.04190913935875E-12</comp> </nuclide> 
+	<nuclide> <id>Cf251</id>  <comp>9.86556100338561E-13</comp> </nuclide> 
+	<nuclide> <id>Cf252</id>  <comp>6.57970721693466E-13</comp> </nuclide> 
+	<nuclide> <id>H3</id>  <comp>8.58461800264195E-08</comp> </nuclide> 
+	<nuclide> <id>C14</id>  <comp>4.05781943561107E-11</comp> </nuclide> 
+	<nuclide> <id>Kr81</id>  <comp>4.21681236076192E-11</comp> </nuclide> 
+	<nuclide> <id>Kr85</id>  <comp>3.44484671160181E-05</comp> </nuclide> 
+	<nuclide> <id>Sr90</id>  <comp>0.0007880649</comp> </nuclide> 
+	<nuclide> <id>Tc99</id>  <comp>0.0011409492</comp> </nuclide> 
+	<nuclide> <id>I129</id>  <comp>0.0002731878</comp> </nuclide> 
+	<nuclide> <id>Cs134</id>  <comp>0.0002300898</comp> </nuclide> 
+	<nuclide> <id>Cs135</id>  <comp>0.0006596706</comp> </nuclide> 
+	<nuclide> <id>Cs137</id>  <comp>0.0018169192</comp> </nuclide> 
+	<nuclide> <id>H1</id>  <comp>0.0477938151</comp> </nuclide> 
 </recipe> 
 
 <recipe>
-    <name>frinrecipe</name>
-    <basis>mass</basis>
-    <nuclide> <id>U234</id>  <comp>9.7224110389438E-05</comp> </nuclide> 
-    <nuclide> <id>U235</id>  <comp>0.0039469814</comp> </nuclide> 
-    <nuclide> <id>U236</id>  <comp>0.0021573569</comp> </nuclide> 
-    <nuclide> <id>U238</id>  <comp>0.8665733427</comp> </nuclide> 
-    <nuclide> <id>Np237</id>  <comp>0.0060565044</comp> </nuclide> 
-    <nuclide> <id>Pu238</id>  <comp>0.0030040068</comp> </nuclide> 
-    <nuclide> <id>Pu239</id>  <comp>0.0606135352</comp> </nuclide> 
-    <nuclide> <id>Pu240</id>  <comp>0.0286774758</comp> </nuclide> 
-    <nuclide> <id>Pu241</id>  <comp>0.0134998465</comp> </nuclide> 
-    <nuclide> <id>Pu242</id>  <comp>0.0084034605</comp> </nuclide> 
-    <nuclide> <id>Am241</id>  <comp>0.0042991968</comp> </nuclide> 
-    <nuclide> <id>Am242m</id>  <comp>7.73428708584307E-06</comp> </nuclide> 
-    <nuclide> <id>Am243</id>  <comp>0.0019207217</comp> </nuclide> 
-    <nuclide> <id>Cm243</id>  <comp>6.47352555460846E-06</comp> </nuclide> 
-    <nuclide> <id>Cm244</id>  <comp>0.0006812961</comp> </nuclide> 
-    <nuclide> <id>Cm245</id>  <comp>5.48431266087054E-05</comp> </nuclide> 
-    <nuclide> <id>H1</id>  <comp>0</comp> </nuclide> 
+	<name>frinrecipe</name>
+	<basis>mass</basis>
+	<nuclide> <id>U234</id>  <comp>9.7224110389438E-05</comp> </nuclide> 
+	<nuclide> <id>U235</id>  <comp>0.0039469814</comp> </nuclide> 
+	<nuclide> <id>U236</id>  <comp>0.0021573569</comp> </nuclide> 
+	<nuclide> <id>U238</id>  <comp>0.8665733427</comp> </nuclide> 
+	<nuclide> <id>Np237</id>  <comp>0.0060565044</comp> </nuclide> 
+	<nuclide> <id>Pu238</id>  <comp>0.0030040068</comp> </nuclide> 
+	<nuclide> <id>Pu239</id>  <comp>0.0606135352</comp> </nuclide> 
+	<nuclide> <id>Pu240</id>  <comp>0.0286774758</comp> </nuclide> 
+	<nuclide> <id>Pu241</id>  <comp>0.0134998465</comp> </nuclide> 
+	<nuclide> <id>Pu242</id>  <comp>0.0084034605</comp> </nuclide> 
+	<nuclide> <id>Am241</id>  <comp>0.0042991968</comp> </nuclide> 
+	<nuclide> <id>Am242m</id>  <comp>7.73428708584307E-06</comp> </nuclide> 
+	<nuclide> <id>Am243</id>  <comp>0.0019207217</comp> </nuclide> 
+	<nuclide> <id>Cm243</id>  <comp>6.47352555460846E-06</comp> </nuclide> 
+	<nuclide> <id>Cm244</id>  <comp>0.0006812961</comp> </nuclide> 
+	<nuclide> <id>Cm245</id>  <comp>5.48431266087054E-05</comp> </nuclide> 
+	<nuclide> <id>H1</id>  <comp>0</comp> </nuclide> 
 </recipe>
 
 <recipe>
@@ -892,4 +979,5 @@
     <nuclide> <id>Cf252</id>  <comp>6.535079715265006e-10</comp> </nuclide> 
     <nuclide> <id>Np237</id>  <comp>0.375539415087</comp> </nuclide> 
 </recipe>
+
 </simulation>

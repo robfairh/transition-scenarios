@@ -1,7 +1,7 @@
 <simulation>
 
 <control>
-    <duration>200</duration>
+    <duration>1440</duration>
     <startmonth>1</startmonth>
     <startyear>2000</startyear>
     <decay>lazy</decay>
@@ -505,59 +505,6 @@
     </institution>
 
     <institution>
-        <config>
-            <NullInst/>
-        </config>
-        <initialfacilitylist>
-        <entry>
-          <number>1</number>
-          <prototype>lwrstorage</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>frstorage</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxstorage</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>lwrreprocessing</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>frreprocessing</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxreprocessing</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>frmixer1</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxmixer1</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>lwrsink</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>frsink</prototype>
-        </entry>
-        <entry>
-          <number>1</number>
-          <prototype>moxsink</prototype>
-        </entry> 
-        </initialfacilitylist>
-        <name>sink_source_facilities</name>
-    </institution>
-
-    <institution>
     <config>
     <DemandDrivenDeploymentInst>
         <calc_method>ma</calc_method>
@@ -571,6 +518,22 @@
           <facility>enrichment</facility>
           <commod>enrichmentout</commod>
         </item>
+        <item>
+          <facility>fr</facility>
+          <commod>POWER</commod>
+        </item>
+        <item>
+          <facility>moxlwr</facility>
+          <commod>POWER</commod>
+        </item>
+        <item>
+          <facility>frmixer1</facility>
+          <commod>frmixerout</commod>
+        </item>
+        <item>
+          <facility>moxmixer1</facility>
+          <commod>moxmixerout</commod>
+        </item>
         </facility_commod>
         <facility_capacity>
         <item>
@@ -581,15 +544,147 @@
           <facility>enrichment</facility>
           <capacity>1e100</capacity>
         </item>
+        <item>
+          <facility>fr</facility>
+          <capacity>333.34</capacity>
+        </item>
+        <item>
+          <facility>moxlwr</facility>
+          <capacity>1000</capacity>
+        </item>
+        <item>
+          <facility>frmixer1</facility>
+          <capacity>2000.0</capacity>
+        </item>
+        <item>
+          <facility>moxmixer1</facility>
+          <capacity>4000.0</capacity>
+        </item>
         </facility_capacity>
+        <facility_pref>
+        <item>
+          <facility>fr</facility>
+          <pref>(t-959)/np.abs(t-959)</pref>
+        </item>
+        <item>
+          <facility>moxlwr</facility>
+          <pref>(t-959)/np.abs(t-959)</pref>
+        </item>
+        </facility_pref>
+        <facility_sharing>
+        <item>
+            <facility>fr</facility>
+            <percentage>60</percentage>
+        </item>
+        <item>
+            <facility>moxlwr</facility>
+            <percentage>40</percentage>
+        </item>
+        </facility_sharing>
+        <buffer_type>
+        <item>
+            <commod>POWER</commod>
+            <type>abs</type>
+        </item>
+        </buffer_type>
+        <supply_buffer>
+        <item>
+            <commod>POWER</commod>
+            <buffer>0</buffer>
+        </item>
+        </supply_buffer>
     </DemandDrivenDeploymentInst>
     </config>
     <name>timeseriesinst</name>
     </institution>
 
+    <institution>
+    <config>
+    <SupplyDrivenDeploymentInst>
+        <calc_method>ma</calc_method>
+        <facility_commod>
+        <item>
+            <facility>lwrstorage</facility>
+            <commod>lwrout</commod>
+        </item>
+        <item>
+            <facility>frstorage</facility>
+            <commod>frout</commod>
+        </item>
+        <item>
+            <facility>moxstorage</facility>
+            <commod>moxout</commod>
+        </item>
+        <item>
+            <facility>lwrreprocessing</facility>
+            <commod>lwrstorageout</commod>
+        </item>
+        <item>
+            <facility>frreprocessing</facility>
+            <commod>frstorageout</commod>
+        </item>
+        <item>
+            <facility>moxreprocessing</facility>
+            <commod>moxstorageout</commod>
+        </item>
+        <item>
+            <facility>lwrsink</facility>
+            <commod>lwrreprocessingwaste</commod>
+        </item>
+        <item>
+            <facility>frsink</facility>
+            <commod>frreprocessingwaste</commod>
+        </item>
+        <item>
+            <facility>moxsink</facility>
+            <commod>moxreprocessingwaste</commod>
+        </item>
+        </facility_commod>
+        <facility_capacity>
+        <item>
+            <facility>lwrstorage</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>frstorage</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>moxstorage</facility>
+            <capacity>1e8</capacity>
+        </item>
+            <item>
+            <facility>lwrreprocessing</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>frreprocessing</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>moxreprocessing</facility>
+            <capacity>1e8</capacity>
+        </item>
+        <item>
+            <facility>lwrsink</facility>
+            <capacity>1e20</capacity>
+        </item>
+        <item>
+            <facility>frsink</facility>
+            <capacity>1e20</capacity>
+        </item>
+        <item>
+            <facility>moxsink</facility>
+            <capacity>1e20</capacity>
+        </item>
+        </facility_capacity>
+    </SupplyDrivenDeploymentInst>
+    </config>
+    <name>supplydrivendeploymentinst</name>
+    </institution>
+
     <name>SingleRegion</name>
     </region>
-
 <recipe>
    <name>sourceoutrecipe</name>
    <basis>mass</basis>
