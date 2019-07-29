@@ -97,10 +97,19 @@ for ex: lwrpu. If the supply is 21000, then one could have 13000 and the other o
 Works!! >> just for ma :(
 
 - eg01-eg29-flatpower-d3ploy6.xml
-copy of 4 but mixers are demand driven deployed.
-fr and mox start with 1 batch instead of 3
+mixers are suply driven deployed.
 we try the sharing power capability
 it works for ma --> eg01-eg29-flatpower-d3ploy6_ma.xml
+flatpower_deployB.py produces this type of input file
+it works for ma
 
-- eg01-eg29-flatpower-d3ploy7_ma.xml
-make the mixers demand_driven
+- flatpower_deployC.py:
+deploys mixers as demand driven
+fr and mox start with 1 batch instead of 3
+seems to be working, at least for ma
+
+- flatpower_deployD.py:
+deploys mixers as demand driven
+fr and mox start with 1 batch instead of 3
+this one adds installed cap
+seems to be working, at least for ma

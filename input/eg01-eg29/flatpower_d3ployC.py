@@ -26,18 +26,19 @@ direc = os.listdir('./')
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 
-calc_methods = ["ma", "arma", "poly", "exp_smoothing", "fft"]
+#calc_methods = ["ma"]
 #calc_methods = ["ma", "arma", "arch"]
 #calc_methods = ["sw_seasonal"]
 #calc_methods = ["poly", "exp_smoothing", "holt_winters",
 #                "fft"]
+calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters", "fft"]
 
 name = 'eg01-eg29-flatpower-d3ployC-onemixer'
 
 demand_eq = "60000"
 buff_size = sys.argv[1]
 
-thro_frmixer1 = 2e3
+thro_frmixer1 = 50e3
 buffer_fr1P = thro_frmixer1 / (1.0 + 0.819 / 0.071 + 0.110 / 0.071)
 buffer_fr1U = (buffer_fr1P * 0.819 / 0.071) * 1.05
 buffer_fr1NU = (buffer_fr1P * 0.110 / 0.071) * 1.05
@@ -46,7 +47,7 @@ buffer_fr1P = str(buffer_fr1P)
 buffer_fr1U = str(buffer_fr1U)
 buffer_fr1NU = str(buffer_fr1NU)
 
-thro_moxmixer1 = 4e3
+thro_moxmixer1 = 100e3
 buffer_mox1P = thro_moxmixer1 / (1.0 + 0.9089 / 0.0911)
 buffer_mox1U = (buffer_mox1P * 0.9089 / 0.0911) * 1.05
 thro_moxmixer1 = str(thro_moxmixer1)
@@ -419,6 +420,7 @@ control = """
                 </stream>
             </in_streams>
             <out_commod>frmixerout</out_commod>
+            <out_buf_size>%s</out_buf_size>
             <throughput>%s</throughput>
         </Mixer>
     </config>
@@ -471,6 +473,7 @@ control = """
                 </stream>
             </in_streams>
             <out_commod>moxmixerout</out_commod>
+            <out_buf_size>%s</out_buf_size>
             <throughput>%s</throughput>
         </Mixer>
     </config>
@@ -511,8 +514,8 @@ control = """
         </Sink>
     </config>
 </facility>
-""" % (buffer_fr1P, buffer_fr1U, buffer_fr1NU, thro_frmixer1,
-       buffer_mox1P, buffer_mox1U, thro_moxmixer1)
+""" % (buffer_fr1P, buffer_fr1U, buffer_fr1NU, thro_frmixer1, thro_frmixer1,
+       buffer_mox1P, buffer_mox1U, thro_moxmixer1, thro_moxmixer1)
 
 recipes = """
 <recipe>
@@ -874,6 +877,7 @@ for calc_method in calc_methods:
     <DemandDrivenDeploymentInst>
         <calc_method>%s</calc_method>
         <demand_eq>%s</demand_eq>
+        
         <facility_commod>
         <item>
           <facility>source</facility>

@@ -26,7 +26,8 @@ direc = os.listdir('./')
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 
-calc_methods = ["ma", "arma", "poly", "exp_smoothing", "fft"]
+calc_methods = ["ma"]
+#calc_methods = ["ma", "arma", "poly", "exp_smoothing", "fft"]
 #calc_methods = ["ma", "arma", "arch"]
 #calc_methods = ["sw_seasonal"]
 #calc_methods = ["poly", "exp_smoothing", "holt_winters",

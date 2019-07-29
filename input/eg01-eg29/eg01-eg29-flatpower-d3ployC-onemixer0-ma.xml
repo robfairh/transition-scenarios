@@ -94,7 +94,7 @@
             <cycle_time>18</cycle_time>
             <refuel_time>0</refuel_time>
             <assem_size>29863.3</assem_size>
-            <n_assem_core>1</n_assem_core>
+            <n_assem_core>3</n_assem_core>
             <n_assem_batch>1</n_assem_batch>
             <power_cap>1000</power_cap>
         </Reactor>
@@ -132,7 +132,7 @@
             <cycle_time>18</cycle_time>
             <refuel_time>0</refuel_time>
             <assem_size>33130</assem_size>
-            <n_assem_core>3</n_assem_core>
+            <n_assem_core>1</n_assem_core>
             <n_assem_batch>1</n_assem_batch>
             <power_cap>1000</power_cap>
         </Reactor>
@@ -318,7 +318,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.071</mixing_ratio>
-                        <buf_size>142.0</buf_size>
+                        <buf_size>3550.0</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -334,7 +334,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.819</mixing_ratio>
-                        <buf_size>1719.9</buf_size>
+                        <buf_size>42997.5</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -350,7 +350,7 @@
                 <stream>
                     <info>
                       <mixing_ratio>0.110</mixing_ratio>
-                      <buf_size>231.0</buf_size>
+                      <buf_size>5775.000000000001</buf_size>
                     </info>
                     <commodities>
                       <item>
@@ -365,7 +365,8 @@
                 </stream>
             </in_streams>
             <out_commod>frmixerout</out_commod>
-            <throughput>2000.0</throughput>
+            <out_buf_size>50000.0</out_buf_size>
+            <throughput>50000.0</throughput>
         </Mixer>
     </config>
 </facility>
@@ -378,7 +379,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.0911</mixing_ratio>
-                        <buf_size>364.4</buf_size>
+                        <buf_size>9110.0</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -398,7 +399,7 @@
                 <stream>
                     <info>
                         <mixing_ratio>0.9089</mixing_ratio>
-                        <buf_size>3817.3799999999997</buf_size>
+                        <buf_size>95434.5</buf_size>
                     </info>
                     <commodities>
                         <item>
@@ -417,7 +418,8 @@
                 </stream>
             </in_streams>
             <out_commod>moxmixerout</out_commod>
-            <throughput>4000.0</throughput>
+            <out_buf_size>100000.0</out_buf_size>
+            <throughput>100000.0</throughput>
         </Mixer>
     </config>
 </facility>
@@ -509,6 +511,7 @@
     <DemandDrivenDeploymentInst>
         <calc_method>ma</calc_method>
         <demand_eq>60000</demand_eq>
+        
         <facility_commod>
         <item>
           <facility>source</facility>
@@ -554,11 +557,11 @@
         </item>
         <item>
           <facility>frmixer1</facility>
-          <capacity>2000.0</capacity>
+          <capacity>50000.0</capacity>
         </item>
         <item>
           <facility>moxmixer1</facility>
-          <capacity>4000.0</capacity>
+          <capacity>100000.0</capacity>
         </item>
         </facility_capacity>
         <facility_pref>
