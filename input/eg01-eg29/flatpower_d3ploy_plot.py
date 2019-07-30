@@ -39,14 +39,14 @@ def plot_several(name, all_dict, commod, calc_methods, demand_eq):
         ax.semilogy(*zip(*sorted(dict_supply[calc_method].items())), 'x',
                     label=calc_method + ' Supply', markersize=4)
 
-    ax.set_xlabel('Time (month timestep)', fontsize=14)
+    ax.set_xlabel('Time (month timestep)', fontsize=21)
     if commod.lower() == 'power':
-        ax.set_ylabel('Power (MW)', fontsize=14)
+        ax.set_ylabel('Power (MW)', fontsize=21)
     else:
-        ax.set_ylabel('Mass (Kg)', fontsize=14)
+        ax.set_ylabel('Mass (Kg)', fontsize=21)
 
     handles, labels = ax.get_legend_handles_labels()
-    ax.legend(handles, labels, fontsize=11, loc='upper center',
+    ax.legend(handles, labels, fontsize=18, loc='upper center',
               bbox_to_anchor=(1.1, 1.0), fancybox=True)
 
     #plt.minorticks_off()
@@ -65,26 +65,25 @@ direc = os.listdir('./')
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 
-calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters",
-                "fft"]
+#calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters",
+#                "fft"]
+calc_methods = ["ma", "arma", "arch"]
 
 demand_eq = "60000"
 
 metric_dict = {}
 all_dict = {}
 
-front_commods = ['sourceout', 'enrichmentout']
-back_commods = ['lwrpu', 'frpu']
+front_commods = ['sourceout', 'enrichmentout', 'frmixerout', 'moxmixerout']
+back_commods = ['lwrstorageout', 'frstorageout', 'moxstorageout']
 
-add = '0'
-# add = sys.argv[1]
-name = 'eg01-eg29-flatpower-d3ployD-onemixer' + add
+buffer_size = '0'
+name = 'eg01-eg29-flatpower-d3ployD-onemixer' + buffer_size
 
-"""
+
 for calc_method in calc_methods:
     output_file = name + '-' + calc_method + '.sqlite'
-    print(output_file)
-
+    
     all_dict['power'] = tester.supply_demand_dict_driving(output_file,
                                                           demand_eq,
                                                           'power')
@@ -98,12 +97,6 @@ for calc_method in calc_methods:
         metric_dict = tester.metrics(
             all_dict[commod], metric_dict, calc_method, commod, True)
 
-        commod = 'mixerout'
-        all_dict[commod] = tester.supply_demand_dict_nond3ploy(output_file,
-                                                               commod)
-        metric_dict = tester.metrics(
-            all_dict[commod], metric_dict, calc_method, commod, True)
-
     for commod in back_commods:
         all_dict[commod] = tester.supply_demand_dict_nondriving(output_file,
                                                                 commod, False)
@@ -113,10 +106,8 @@ for calc_method in calc_methods:
     df = pd.DataFrame(metric_dict)
     df.to_csv(name + '.csv')
 
-"""
-
 calc_methods1 = ["ma", "arma", "arch"]
-calc_methods2 = ["poly", "exp_smoothing", "holt_winters", "fft"]
+#calc_methods2 = ["poly", "exp_smoothing", "holt_winters", "fft"]
 #calc_methods3 = ["sw_seasonal"]
 
 for calc_method in calc_methods1:
@@ -125,26 +116,24 @@ for calc_method in calc_methods1:
                                                               demand_eq,
                                                               'power')
 
-plot_several('29-powerD' + add + '1', all_dict, 'power', calc_methods1,
+plot_several('29-power' + buffer_size + '1', all_dict, 'power', calc_methods1,
              demand_eq)
-
-
+"""
 for calc_method in calc_methods2:
     output_file = name + '-' + calc_method + '.sqlite'
     all_dict[calc_method] = tester.supply_demand_dict_driving(output_file,
                                                               demand_eq,
                                                               'power')
 
-plot_several('29-powerD' + add + '2', all_dict, 'power', calc_methods2,
+plot_several('29-power' + buffer_size + '2', all_dict, 'power', calc_methods2,
              demand_eq)
 
-"""
 for calc_method in calc_methods3:
     output_file = name + '-' + calc_method + '.sqlite'
     all_dict[calc_method] = tester.supply_demand_dict_driving(output_file,
                                                               demand_eq,
                                                               'power')
 
-plot_several('29-power' + add + '3', all_dict, 'power', calc_methods3,
+plot_several('29-power' + buffer_size + '3', all_dict, 'power', calc_methods3,
              demand_eq)
 """

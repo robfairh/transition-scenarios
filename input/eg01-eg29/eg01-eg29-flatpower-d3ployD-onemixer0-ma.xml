@@ -485,7 +485,7 @@
                     <commodities>
                         <item>
                             <commodity>lwrpu</commodity>
-                            <pref>1.0</pref>
+                            <pref>2.0</pref>
                         </item>
                         <item>
                             <commodity>frpu</commodity>
@@ -501,7 +501,7 @@
                     <commodities>
                         <item>
                             <commodity>lwru</commodity>
-                            <pref>1.0</pref>
+                            <pref>2.0</pref>
                         </item>
                         <item>
                             <commodity>fru</commodity>
@@ -546,7 +546,7 @@
                     <commodities>
                         <item>
                             <commodity>lwrpu</commodity>
-                            <pref>1.0</pref>
+                            <pref>3.0</pref>
                         </item>
                         <item>
                             <commodity>frpu</commodity>
@@ -554,7 +554,7 @@
                         </item>
                         <item>
                             <commodity>moxpu</commodity>
-                            <pref>1.0</pref>
+                            <pref>2.0</pref>
                         </item>
                     </commodities>
                 </stream>
@@ -566,7 +566,7 @@
                     <commodities>
                         <item>
                             <commodity>lwru</commodity>
-                            <pref>1.0</pref>
+                            <pref>3.0</pref>
                         </item>
                         <item>
                             <commodity>fru</commodity>
@@ -574,7 +574,7 @@
                         </item>
                         <item>
                             <commodity>moxu</commodity>
-                            <pref>1.0</pref>
+                            <pref>2.0</pref>
                         </item>
                     </commodities>
                 </stream>

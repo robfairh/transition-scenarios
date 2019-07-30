@@ -113,3 +113,11 @@ deploys mixers as demand driven
 fr and mox start with 1 batch instead of 3
 this one adds installed cap
 seems to be working, at least for ma
+
+This last too work, one for installed cap and the other one without installed cap.
+It doesn't do perfect, it doesn't use all the lwrpu.
+
+eg01-eg29-flatpower-d3ployE-onemixer0:
+changes the preferences in the mixers.
+
+To mention in the report maybe, that the fr and moxlwr start with only one batch, because otherwise, d3ploy will deploy too many facilities that will continue operating. If we had the decommisioning facilitiy then we could simulate the reactors taking initially more fuel.
