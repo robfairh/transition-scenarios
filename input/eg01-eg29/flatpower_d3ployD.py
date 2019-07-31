@@ -34,7 +34,7 @@ ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 #calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters", "fft", "sw_seasonal"]
 calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters", "fft", "sw_seasonal"]
 
-name = 'eg01-eg29-flatpower-d3ployE-onemixer'
+name = 'eg01-eg29-flatpower-d3ployD-onemixer'
 
 demand_eq = "60000"
 buff_size = sys.argv[1]
@@ -541,7 +541,7 @@ control = """
                     <commodities>
                         <item>
                             <commodity>lwrpu</commodity>
-                            <pref>2.0</pref>
+                            <pref>1.0</pref>
                         </item>
                         <item>
                             <commodity>frpu</commodity>
@@ -557,7 +557,7 @@ control = """
                     <commodities>
                         <item>
                             <commodity>lwru</commodity>
-                            <pref>2.0</pref>
+                            <pref>1.0</pref>
                         </item>
                         <item>
                             <commodity>fru</commodity>
@@ -602,7 +602,7 @@ control = """
                     <commodities>
                         <item>
                             <commodity>lwrpu</commodity>
-                            <pref>3.0</pref>
+                            <pref>1.0</pref>
                         </item>
                         <item>
                             <commodity>frpu</commodity>
@@ -610,7 +610,7 @@ control = """
                         </item>
                         <item>
                             <commodity>moxpu</commodity>
-                            <pref>2.0</pref>
+                            <pref>1.0</pref>
                         </item>
                     </commodities>
                 </stream>
@@ -622,7 +622,7 @@ control = """
                     <commodities>
                         <item>
                             <commodity>lwru</commodity>
-                            <pref>3.0</pref>
+                            <pref>1.0</pref>
                         </item>
                         <item>
                             <commodity>fru</commodity>
@@ -630,7 +630,7 @@ control = """
                         </item>
                         <item>
                             <commodity>moxu</commodity>
-                            <pref>2.0</pref>
+                            <pref>1.0</pref>
                         </item>
                     </commodities>
                 </stream>
