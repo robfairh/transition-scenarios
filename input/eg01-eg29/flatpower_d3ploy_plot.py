@@ -65,9 +65,9 @@ direc = os.listdir('./')
 ENV = dict(os.environ)
 ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 
-#calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters",
-#                "fft"]
-calc_methods = ["ma", "arma", "arch"]
+calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters",
+                "fft"]
+#calc_methods = ["ma", "arma", "arch"]
 
 demand_eq = "60000"
 
@@ -107,7 +107,7 @@ for calc_method in calc_methods:
     df.to_csv(name + '.csv')
 
 calc_methods1 = ["ma", "arma", "arch"]
-#calc_methods2 = ["poly", "exp_smoothing", "holt_winters", "fft"]
+calc_methods2 = ["poly", "exp_smoothing", "holt_winters", "fft"]
 #calc_methods3 = ["sw_seasonal"]
 
 for calc_method in calc_methods1:
@@ -118,7 +118,7 @@ for calc_method in calc_methods1:
 
 plot_several('29-power' + buffer_size + '1', all_dict, 'power', calc_methods1,
              demand_eq)
-"""
+
 for calc_method in calc_methods2:
     output_file = name + '-' + calc_method + '.sqlite'
     all_dict[calc_method] = tester.supply_demand_dict_driving(output_file,
@@ -127,7 +127,7 @@ for calc_method in calc_methods2:
 
 plot_several('29-power' + buffer_size + '2', all_dict, 'power', calc_methods2,
              demand_eq)
-
+"""
 for calc_method in calc_methods3:
     output_file = name + '-' + calc_method + '.sqlite'
     all_dict[calc_method] = tester.supply_demand_dict_driving(output_file,

@@ -31,6 +31,7 @@ ENV['PYTHONPATH'] = ".:" + ENV.get('PYTHONPATH', '')
 #calc_methods = ["sw_seasonal"]
 #calc_methods = ["poly", "exp_smoothing", "holt_winters",
 #                "fft"]
+#calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters", "fft", "sw_seasonal"]
 calc_methods = ["ma", "arma", "arch", "poly", "exp_smoothing", "holt_winters", "fft", "sw_seasonal"]
 
 name = 'eg01-eg29-flatpower-d3ployE-onemixer'
